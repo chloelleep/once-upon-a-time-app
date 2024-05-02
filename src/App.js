@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import TextEditor from './components/TextEditor';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <h1>hello</h1>
         <p1>sleep</p1>
         <button>hi</button>
+        <TextEditor></TextEditor>
       </header>
     </div>
   );
