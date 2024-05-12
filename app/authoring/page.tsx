@@ -1,10 +1,14 @@
+'use client'
 import React from 'react'
+import TextEditor from './_components/TextEditor'
 
 type Props = {}
 
 const AuthoringPage = (props: Props) => {
   return (
-    <div>authoring page</div>
+    <div>
+    <TextEditor></TextEditor>
+    </div>
   )
 }
 
