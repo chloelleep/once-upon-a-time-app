@@ -10,5 +10,5 @@ export default function TextEditor() {
   const editor = useCreateBlockNote();
   
   // Renders the editor instance using a React component.
-  return <BlockNoteView editor={editor} />;
+  return <BlockNoteView editor={editor} theme="light"/>;
 }
