@@ -23,6 +23,10 @@ import {
 //</Uploady>);
 
 import { useCreateBlockNote } from '@blocknote/react';
+import { BlockNoteView } from '@blocknote/mantine';
+import "@blocknote/mantine/style.css";
+import { Block} from "@blocknote/core";
+import "@blocknote/core/fonts/inter.css";
 
 type Props = {}
 
@@ -51,7 +55,7 @@ const AuthoringPage = (props: Props) => {
 
 
   // Declare hooks inside the functional component
-  const [html, setHTML] = useState<string>("");
+  const [html, setHTML] = useState<string>('');
 
   // Creates a new editor instance with some initial content.
   const editor = useCreateBlockNote({
@@ -103,47 +107,44 @@ const AuthoringPage = (props: Props) => {
     // Remove the link from the document
     document.body.removeChild(link);
   };
-
-  return (
-    <div className="flex flex-col w-full h-screen items-center p-10">
-    <div className="flex flex-row gap-4">
-      <Link href="/">
-        <Button>
-          <FaArrowLeft />
-        </Button>
-      </Link>
-        <Button>
-          <FaFolderOpen />
-        </Button>
-        <Button>
-          <FaPortrait />
-        </Button>          
-          <Link href="/Api">
-          <Button>
-            <FaPencilAlt />
-          </Button>
-          </Link>
-          <Button onClick={handleOpenToolbox}>
-          <FaTools />
-        </Button>         
-      </div>
-      <div className="h-full w-[80vw] m-10 border-2 rounded-lg py-10">
-      </div>
-      <ImageToolboxDialog
-        images={images}
-        open={toolboxOpen}
-        onClose={handleCloseToolbox}
-        onSelectImage={handleSelectImage}
-      />
-      <Button type="button" onClick={handleClick}><FaDownload /></Button>
+  async function saveToStorage(jsonBlocks: Block[]) {
+    // Save contents to local storage. You might want to debounce this or replace
+    // with a call to your API / database.
+    localStorage.setItem("editorContent", JSON.stringify(jsonBlocks));
+  }
+  return (<div className="flex flex-col w-full h-screen items-center p-10">
+  <div className="flex flex-row gap-4">
+    <Link href="/">
       <Button>
-        <FaFolderOpen />
+        <FaArrowLeft />
       </Button>
+    </Link>
+    <Button onClick={handleOpenToolbox}>
+      <FaTools />
+    </Button>
+    <Button type="button" onClick={handleClick}>
+      <FaDownload />
+    </Button>
+    <Button>
+      <FaFolderOpen />
+    </Button>
+    <Button>
+      <FaPortrait />
+    </Button>
+    <Link href="/Api">
       <Button>
-        <FaPortrait />
+        <FaPencilAlt />
       </Button>
-
-    </div>
+    </Link>
+  </div>
+  
+  <ImageToolboxDialog
+    images={images}
+    open={toolboxOpen}
+    onClose={handleCloseToolbox}
+    onSelectImage={handleSelectImage}
+  />
+</div>
   );
 };
 //<Button type="button" onClick={handleClick}><FaDownload /></Button>
