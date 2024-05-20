@@ -12,6 +12,7 @@
     "@blocknote/core": "^0.13.2",
     "@blocknote/mantine": "^0.13.2",
     "@blocknote/react": "^0.13.2",
+    "@mui/material": "^5.15.18",
     "@next/font": "^14.2.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@rpldy/upload-button": "^1.8.0",

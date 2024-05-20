@@ -72,7 +72,7 @@ export default function Chat() {
     const [loading, setLoading] = useState(false);
     const messageRef = useRef<MessageProps[]>([]);
     const apiKey = "sk-proj-zJPRA6D3w3jOuGxQOwcpT3BlbkFJ0aQZfjF9F3IPVyE8sQBa";
-    const apiUrl = 'https://api.openai.com/v1/engines/davinci-codex/completions';
+    const apiUrl = 'https://api.openai.com/v1/chat/completions';
 
     useEffect(() => {
         messageRef.current = messages;
@@ -97,9 +97,10 @@ export default function Chat() {
                     'Authorization': `Bearer ${apiKey}`
                 },
                 body: JSON.stringify({
-                    prompt: input,
                     max_tokens: 150,
                     temperature: 0.7,
+                    model:"gpt-3.5-turbo",
+                    messages:[{"role": "user", "content": input}]
                 })
             });
             const data = await response.json();
@@ -107,7 +108,7 @@ export default function Chat() {
 
             if (data.choices && data.choices.length > 0) {
                 const botMessage: MessageProps = {
-                    text: data.choices[0].text.trim(),
+                    text: data.choices[0].message.content.trim(),
                     from: Creator.Bot,
                     key: new Date().getTime()
                 };
