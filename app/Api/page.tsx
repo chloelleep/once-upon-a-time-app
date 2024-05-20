@@ -71,7 +71,7 @@ export default function Chat() {
     const [messages, setMessages] = useState<MessageProps[]>([]);
     const [loading, setLoading] = useState(false);
     const messageRef = useRef<MessageProps[]>([]);
-    const apiKey = "please add your API key here";
+    const apiKey = "sk-proj-zJPRA6D3w3jOuGxQOwcpT3BlbkFJ0aQZfjF9F3IPVyE8sQBa";
     const apiUrl = 'https://api.openai.com/v1/chat/completions';
 
     useEffect(() => {

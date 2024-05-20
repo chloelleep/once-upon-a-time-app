@@ -144,6 +144,16 @@ const AuthoringPage = (props: Props) => {
     onClose={handleCloseToolbox}
     onSelectImage={handleSelectImage}
   />
+  <div className="w-full h-full">
+    <BlockNoteView
+    className="w-full"
+    editor={editor}
+    onChange={() => {
+      saveToStorage(editor.document);
+    }}
+/>
+  </div>
+  
 </div>
   );
 };
