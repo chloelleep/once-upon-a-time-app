@@ -5,12 +5,16 @@ import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaDownload, FaFolderOpen, FaPortrait } from "react-icons/fa";
 import { useCreateBlockNote } from '@blocknote/react';
 import TextEditor from './_components/TextEditor';
+import { BlockNoteView } from '@blocknote/mantine';
+import "@blocknote/mantine/style.css";
+import { Block} from "@blocknote/core";
+import "@blocknote/core/fonts/inter.css";
 
 type Props = {}
 
 const AuthoringPage = (props: Props) => {
   // Declare hooks inside the functional component
-  const [html, setHTML] = useState<string>("");
+  const [html, setHTML] = useState<string>('');
 
   // Creates a new editor instance with some initial content.
   const editor = useCreateBlockNote({
@@ -62,7 +66,11 @@ const AuthoringPage = (props: Props) => {
     // Remove the link from the document
     document.body.removeChild(link);
   };
-
+  async function saveToStorage(jsonBlocks: Block[]) {
+    // Save contents to local storage. You might want to debounce this or replace
+    // with a call to your API / database.
+    localStorage.setItem("editorContent", JSON.stringify(jsonBlocks));
+  }
   return (
     <div className="flex flex-col w-full h-screen items-center p-10">
     <div className="flex flex-row gap-4">
@@ -80,7 +88,13 @@ const AuthoringPage = (props: Props) => {
       </Button>
     </div>
     <div className="h-full w-[80vw] m-10 border-2 rounded-lg py-10">
-      <TextEditor></TextEditor>
+    <BlockNoteView
+      editor={editor}
+      onChange={() => {
+        saveToStorage(editor.document);
+      }}
+      
+    />
     </div>
   </div>
   );
