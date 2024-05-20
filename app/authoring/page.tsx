@@ -64,19 +64,27 @@ const AuthoringPage = (props: Props) => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col w-full h-screen items-center p-10">
+    <div className="flex flex-row gap-4">
       <Link href="/">
-        <Button><FaArrowLeft /></Button>
+        <Button>
+          <FaArrowLeft />
+        </Button>
       </Link>
-      
       <Button type="button" onClick={handleClick}><FaDownload /></Button>
-      <Button><FaFolderOpen /></Button>
-      <Button><FaPortrait /></Button>
-
-      <TextEditor />
+      <Button>
+        <FaFolderOpen />
+      </Button>
+      <Button>
+        <FaPortrait />
+      </Button>
     </div>
+    <div className="h-full w-[80vw] m-10 border-2 rounded-lg py-10">
+      <TextEditor></TextEditor>
+    </div>
+  </div>
   );
 };
-
+//<Button type="button" onClick={handleClick}><FaDownload /></Button>
 export default AuthoringPage;
 

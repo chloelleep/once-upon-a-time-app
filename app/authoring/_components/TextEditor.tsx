@@ -11,5 +11,4 @@ export default function TextEditor() {
   
   // Renders the editor instance using a React component.
   return <BlockNoteView editor={editor} />;
-  
 }
