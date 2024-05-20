@@ -7,8 +7,10 @@ import {
   FaDownload,
   FaFolderOpen,
   FaPortrait,
+  FaPencilAlt,
+  FaTools
 } from "react-icons/fa";
-import styled from "styled-components";
+//import styled from "styled-components";
 import Link from "next/link";
 //import { upload } from 'upload';
 //import Uploady from "@rpldy/uploady";
@@ -37,7 +39,17 @@ const AuthoringPage = (props: Props) => {
         </Button>
         <Button>
           <FaPortrait />
-        </Button>
+        </Button>          
+          <Link href="/Api">
+          <Button>
+            <FaPencilAlt />
+          </Button>
+          </Link>
+          <Link href="/Api">
+          <Button>
+            <FaTools />
+          </Button>
+          </Link>
       </div>
       <div className="h-full w-[80vw] m-10 border-2 rounded-lg py-10">
         <TextEditor></TextEditor>

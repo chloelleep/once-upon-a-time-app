@@ -1,0 +1,75 @@
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    line-height: 1.6;
+}
+
+/* Root Element */
+#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* App Main */
+.app-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* App Input */
+.app-input {
+    width: 300px;
+    height: 40px;
+    margin: 20px 0;
+    padding: 0 10px;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    transition: border 0.3s ease;
+}
+
+.app-input:focus {
+    border-color: #000000;
+    outline: none;
+}
+
+/* Add some spacing and styles for buttons if there are any */
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #333333;
+}
+
+/* Heading Styling */
+h2 {
+    font-size: 2rem;
+    margin: 20px 0;
+    color: #000000;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
