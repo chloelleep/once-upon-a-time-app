@@ -23,7 +23,7 @@ import {
 //</Uploady>);
 
 import { useCreateBlockNote } from '@blocknote/react';
-import { BlockNoteView } from '@blocknote/mantine';
+import { BlockNoteView, lightDefaultTheme } from '@blocknote/mantine';
 import "@blocknote/mantine/style.css";
 import { Block} from "@blocknote/core";
 import "@blocknote/core/fonts/inter.css";
@@ -144,9 +144,10 @@ const AuthoringPage = (props: Props) => {
     onClose={handleCloseToolbox}
     onSelectImage={handleSelectImage}
   />
-  <div className="w-full h-full">
+  <div className="w-full h-full border-2 rounded-lg m-5">
     <BlockNoteView
-    className="w-full"
+    theme={lightDefaultTheme}
+    className="w-full py-6"
     editor={editor}
     onChange={() => {
       saveToStorage(editor.document);
