@@ -7,19 +7,29 @@ interface ImageToolboxDialogProps {
   onSelectImage: (image: string) => void;
 }
 
+type ImageDataType = {
+  imageUrl: string,
+  soundUrl: string
+}
+
 const ImageToolboxDialog: React.FC<ImageToolboxDialogProps> = ({ images, open, onClose, onSelectImage }) => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<ImageDataType | undefined>(undefined);
   const [imagePosition, setImagePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
 
   const handleSelectImageInternal = (image: { imageUrl: string, soundUrl: string }) => {
-    setSelectedImage(image.imageUrl);
+    setSelectedImage(image);
     onSelectImage(image.imageUrl);
-
-    // Play the associated sound
-    const audio = new Audio(image.soundUrl);
-    audio.play();
   };
+
+  const handleSelectedImageHover = () => {
+    // Play the associated sound
+    console.log("Playing audio....");
+    // TODO: change to dynamic audio
+    // const audio = new Audio(selectedImage.soundUrl);
+    const audio = new Audio('https://cdn.pixabay.com/audio/2022/03/10/audio_5adfa08633.mp3');
+    audio.play();
+  }
 
   const handleMouseDown = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     setIsDragging(true);
@@ -77,7 +87,7 @@ const ImageToolboxDialog: React.FC<ImageToolboxDialogProps> = ({ images, open, o
       {selectedImage && (
         <div>
           <h3 style={{ color: 'white' }}>Selected Image:</h3>
-          <img src={selectedImage} alt="Selected" style={{ width: '150px', borderRadius: '10px' }} />
+          <img src={selectedImage.imageUrl} alt="Selected" style={{ width: '150px', borderRadius: '10px' }} onMouseEnter={() => handleSelectedImageHover()}/>
         </div>
       )}
     </div>
