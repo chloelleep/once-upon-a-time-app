@@ -11,7 +11,8 @@ import {
   FaFolderOpen,
   FaPortrait,
   FaPencilAlt,
-  FaTools
+  FaTools,
+  FaImage
 } from "react-icons/fa";
 //import styled from "styled-components";
 import Link from "next/link";
@@ -72,7 +73,12 @@ const AuthoringPage = (props: Props) => {
           </Link>
           <Button onClick={handleOpenToolbox}>
           <FaTools />
-        </Button>         
+        </Button>
+          <Link href="/Image"><Button>
+            <FaImage />
+          </Button>
+          </Link>
+
       </div>
       <div className="h-full w-[80vw] m-10 border-2 rounded-lg py-10">
         <TextEditor></TextEditor>
