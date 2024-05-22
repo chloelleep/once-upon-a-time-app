@@ -128,9 +128,11 @@ const AuthoringPage = (props: Props) => {
     <Button>
       <FaFolderOpen />
     </Button>
-    <Button>
-      <FaPortrait />
-    </Button>
+    <Link href="/profile">
+      <Button>
+        <FaPortrait />
+      </Button>
+    </Link>
     <Link href="/Api">
       <Button>
         <FaPencilAlt />
