@@ -10,7 +10,8 @@ import {
   FaFolderOpen,
   FaPortrait,
   FaPencilAlt,
-  FaTools
+  FaTools,
+  FaImages
 } from "react-icons/fa";
 //import styled from "styled-components";
 //import { upload } from 'upload';
@@ -137,6 +138,11 @@ const AuthoringPage = (props: Props) => {
     <Link href="/Api">
       <Button>
         <FaPencilAlt />
+      </Button>
+    </Link>
+    <Link href="/Image">
+      <Button>
+        <FaImages />
       </Button>
     </Link>
   </div>
