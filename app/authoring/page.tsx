@@ -47,8 +47,11 @@ const AuthoringPage = (props: Props) => {
   };
 
   const images = [
-    { imageUrl: 'https://laotiantimes.com/wp-content/uploads/2016/08/rainjpeg.jpg', soundUrl: 'https://www.epidemicsound.com/track/D8n3lMZZQH/' },
-    { imageUrl: 'https://th.bing.com/th/id/OIP.UGUgWT7EvzusNcTl-aKKvwHaE8?rs=1&pid=ImgDetMain', soundUrl: 'https://pixabay.com/sound-effects/075176-duck-quack-40345/' },
+    //rain
+    { imageUrl: 'https://laotiantimes.com/wp-content/uploads/2016/08/rainjpeg.jpg', soundUrl: 'https://cdn.pixabay.com/download/audio/2024/05/14/audio_ec8f1e52ad.mp3?filename=heavy-rain-on-steel-roof-208929.mp3' },
+    //duck
+    { imageUrl: 'https://th.bing.com/th/id/OIP.UGUgWT7EvzusNcTl-aKKvwHaE8?rs=1&pid=ImgDetMain', soundUrl: 'https://cdn.pixabay.com/audio/2022/03/10/audio_5adfa08633.mp3' },
+    //cat
     { imageUrl: 'https://th.bing.com/th/id/R.1d8b77786649f352eca392ca48f348d6?rik=6AlDF0gCYhA0nQ&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f07%2fCute-Baby-Animal-Photo-Free-Download.jpg&ehk=0iddreAFFy0Gw6IM6zCsZ1orEWRLt72nnqUnu6831pA%3d&risl=&pid=ImgRaw&r=0', soundUrl:'https://pixabay.com/sound-effects/cat-98721/' }
   ];
 

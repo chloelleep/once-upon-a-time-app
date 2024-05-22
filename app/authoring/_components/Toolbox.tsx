@@ -26,8 +26,9 @@ const ImageToolboxDialog: React.FC<ImageToolboxDialogProps> = ({ images, open, o
     // Play the associated sound
     console.log("Playing audio....");
     // TODO: change to dynamic audio
-    // const audio = new Audio(selectedImage.soundUrl);
-    const audio = new Audio('https://cdn.pixabay.com/audio/2022/03/10/audio_5adfa08633.mp3');
+    const audio = new Audio(selectedImage?.soundUrl);
+    //const audio = new Audio('https://cdn.pixabay.com/audio/2022/03/10/audio_5adfa08633.mp3');
+    setTimeout(() => {audio.pause();}, 2000);
     audio.play();
   }
 
