@@ -1,9 +1,8 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import ImageToolboxDialog from './_components/Toolbox';
-
 import {
   FaArrowLeft,
   FaDownload,
@@ -12,25 +11,25 @@ import {
   FaPencilAlt,
   FaTools
 } from "react-icons/fa";
-//import styled from "styled-components";
-//import { upload } from 'upload';
-//import Uploady from "@rpldy/uploady";
-//import UploadButton from "@rpldy/upload-button";
-
-//const App = () => (<Uploady
-//destination={{ url: "http://localhost:3000/authoring" }}>
-//  <UploadButton/>
-//</Uploady>);
-
 import { useCreateBlockNote } from '@blocknote/react';
 import { BlockNoteView, lightDefaultTheme } from '@blocknote/mantine';
 import "@blocknote/mantine/style.css";
 import { Block} from "@blocknote/core";
 import "@blocknote/core/fonts/inter.css";
+import { stringify } from 'querystring';
 
 type Props = {}
 
-const AuthoringPage = (props: Props) => {
+const AuthoringPage: React.FC<Props> = (props) => {
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [file, setFile] = useState<File | undefined>();
+
+  const handleFolderOpenClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
   const [toolboxOpen, setToolboxOpen] = useState(false);
 
   const handleOpenToolbox = () => {
@@ -52,8 +51,6 @@ const AuthoringPage = (props: Props) => {
     { imageUrl: 'https://th.bing.com/th/id/R.1d8b77786649f352eca392ca48f348d6?rik=6AlDF0gCYhA0nQ&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f07%2fCute-Baby-Animal-Photo-Free-Download.jpg&ehk=0iddreAFFy0Gw6IM6zCsZ1orEWRLt72nnqUnu6831pA%3d&risl=&pid=ImgRaw&r=0', soundUrl:'https://pixabay.com/sound-effects/cat-98721/' }
   ];
 
-
-
   // Declare hooks inside the functional component
   const [html, setHTML] = useState<string>('');
 
@@ -62,24 +59,22 @@ const AuthoringPage = (props: Props) => {
     initialContent: [
       {
         type: 'paragraph',
-        content: [
-          'Hello, ',
-          {
-            type: 'text',
-            text: 'world!',
-            styles: {
-              bold: true,
-            },
-          },
-        ],
+        content: [],
       },
     ],
   });
 
-  const onChange = async () => {
-    // Converts the editor's contents from Block objects to HTML and store to state.
-    const html = await editor.blocksToHTMLLossy(editor.document);
-    setHTML(html);
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const htmlContent = e.target?.result as string;
+        const blocks = await editor.tryParseHTMLToBlocks(htmlContent);
+        editor.replaceBlocks(editor.document, blocks);
+      };
+      reader.readAsText(file);
+    }
   };
 
   const handleClick = async () => {
@@ -125,8 +120,15 @@ const AuthoringPage = (props: Props) => {
     <Button type="button" onClick={handleClick}>
       <FaDownload />
     </Button>
-    <Button>
+    <Button onClick={handleFolderOpenClick}>
       <FaFolderOpen />
+        <input
+          type="file"
+          name="textfile"
+          style={{ display: 'none' }}
+          ref={fileInputRef}
+          onChange={handleFileChange}
+        />
     </Button>
     <Link href="/profile">
       <Button>
@@ -152,7 +154,8 @@ const AuthoringPage = (props: Props) => {
     className="w-full py-6"
     editor={editor}
     onChange={() => {
-      saveToStorage(editor.document);
+      //saveToStorage(editor.document);
+      localStorage.setItem("editorContent", JSON.stringify(editor.document));
     }}
 />
   </div>
@@ -162,4 +165,3 @@ const AuthoringPage = (props: Props) => {
 };
 //<Button type="button" onClick={handleClick}><FaDownload /></Button>
 export default AuthoringPage;
-
