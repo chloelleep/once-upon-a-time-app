@@ -9,7 +9,7 @@ const DemoPage = (props: Props) => {
     const dummyStoryFiles = [
         {
             name: "Three Littleb Pigs",
-            filesource: "/demo.html"
+            filesource: "/three little pigs.html"
         },
         {
             name: "demo story",
@@ -28,7 +28,7 @@ const DemoPage = (props: Props) => {
   return (
     <div>
         <NavBar></NavBar>
-        <div className="bg-emerald-200 w-full h-screen p-24">
+        <div className="bg-green-100 w-full h-screen p-24">
             
             <h2 className="text-lg">
                 You might want to try

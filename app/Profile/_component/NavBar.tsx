@@ -5,12 +5,12 @@ type Props = {}
 
 const NavBar = (props: Props) => {
   return (
-    <div className="flex flex-row items-center justify-between h-[60px] bg-indigo-400 w-full">
+    <div className="flex flex-row items-center justify-between h-[60px] bg-green-700 w-full">
         <h1 className="text-2xl">
-            NavBar
+             Once upon A Time
         </h1>
         <div className="flex flex-row items-center gap-2">
-            <Button>Click me</Button>
+            <Button>New Project</Button>
             <p>some other text</p>
         </div>
     </div>
