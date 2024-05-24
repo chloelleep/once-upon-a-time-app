@@ -50,7 +50,8 @@ const DemoPage = (props: Props) => {
         },
         {
             name: "Wonky Donkey",
-            filesource: "/1270878-565411-35.jpg"
+            filesource: "/1270878-565411-35.jpg",
+            link1: "/Wonky Donkey.html"
         }
     ]
 
