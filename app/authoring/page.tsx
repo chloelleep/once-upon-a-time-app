@@ -6,7 +6,6 @@ import ImageToolboxDialog from './_components/Toolbox';
 
 import {
   FaArrowLeft,
-  FaHome,
   FaDownload,
   FaFolderOpen,
   FaPortrait,
@@ -64,8 +63,14 @@ const AuthoringPage = (props: Props) => {
       {
         type: 'paragraph',
         content: [
-          'Start your story here...',
-          
+          'Hello, ',
+          {
+            type: 'text',
+            text: 'world!',
+            styles: {
+              bold: true,
+            },
+          },
         ],
       },
     ],
@@ -88,7 +93,7 @@ const AuthoringPage = (props: Props) => {
     const link = document.createElement('a');
 
     // Set the download attribute with a filename
-    link.download = 'MyStory.html';
+    link.download = 'document.html';
 
     // Create a URL for the blob
     link.href = URL.createObjectURL(blob);
@@ -110,32 +115,27 @@ const AuthoringPage = (props: Props) => {
   return (<div className="bg-green-100 flex flex-col w-full h-screen items-center p-10">
   <div className="flex flex-row gap-4">
     <Link href="/Profile">
-      <Button className="bg-green-900">
+      <Button className='bg-green-900'>
         <FaArrowLeft />
       </Button>
     </Link>
-    <Button className="bg-green-900" onClick={handleOpenToolbox}>
+    <Button className='bg-green-900' onClick={handleOpenToolbox}>
       <FaTools />
     </Button>
-    <Button className="bg-green-900" type="button" onClick={handleClick}>
+    <Button className='bg-green-900' type="button" onClick={handleClick}>
       <FaDownload />
     </Button>
-    <Button className="bg-green-900">
+    <Button className='bg-green-900'>
       <FaFolderOpen />
     </Button>
     <Link href="/Profile">
-      <Button className="bg-green-900">
+      <Button className='bg-green-900'>
         <FaPortrait />
       </Button>
     </Link>
     <Link href="/Api">
-      <Button className="bg-green-900">
+      <Button className='bg-green-900'>
         <FaPencilAlt />
-      </Button>
-    </Link>
-    <Link href="/">
-      <Button className="bg-green-900">
-        <FaHome/>
       </Button>
     </Link>
   </div>

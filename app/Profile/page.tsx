@@ -12,46 +12,52 @@ const DemoPage = (props: Props) => {
         {
             name: "Three Little Pigs",
             filesource: "/9ed53026f3c86535be9b9e36efc6a123.jpg",
-            link1: "/ThreeLittlePigs.html"
+            Story: "/ThreeLittlePigs.html"
         },
         {
             name: "A wolf's Howl",
             filesource: "/ceccae4a250b2f9f16dd7ee3c90fd05f.jpg",
-            link1: "/ThreeLittlePigs.html"
+            Story: "/A wolf's Howl.html"
         },
         {
             name: "Goldilock",
             filesource: "/f3e62d74100ac55b32028b88a63f3d51.jpg",
-            link1: "/ThreeLittlePigs.html"
+            Story: "/Goldilocks.html"
         },
         {
             name: "Little Red Riding Hood",
-            filesource: "/4f26bcbd1a35e8bdecc61d0a1049eaca.jpg"
+            filesource: "/4f26bcbd1a35e8bdecc61d0a1049eaca.jpg",
+            Story: "/Little Red Riding Hood.html"
         },
         {
             name: "Princess and the Frog",
-            filesource: "/dcd8feb33bc6b57872b575326a411f62.jpg"
+            filesource: "/dcd8feb33bc6b57872b575326a411f62.jpg",
+            Story: "/Princess and the Frog.html"
         },
         {
             name: "The Duckling Who Did Not Like Rain",
-            filesource: "/bcdc2577fb8311ec7d56e664e96ec868.jpg"
+            filesource: "/bcdc2577fb8311ec7d56e664e96ec868.jpg",
+            Story: "/The Duckling who did not like rain.html"
         },
         {
             name: "The Fox and the Giraffe",
-            filesource: "/the_giraffe_and_the_fox.aw02.final_lo_res.jpg"
+            filesource: "/the_giraffe_and_the_fox.aw02.final_lo_res.jpg",
+            Story: "/The Fox and the Giraffe.html"
         },
         {
             name: "The Gingerbread Man",
-            filesource: "/3bc713a59749b44bfb43c78ea2def8bf.jpg"
+            filesource: "/3bc713a59749b44bfb43c78ea2def8bf.jpg",
+            Story: "/The Gingerbread Man.html"
         },
         {
             name: "Tooth Fairy",
-            filesource: "/74b3b5007d64eb511f55d7b3c9514b72.jpg"
+            filesource: "/74b3b5007d64eb511f55d7b3c9514b72.jpg",
+            Story: "/Tooth Fairy.html"
         },
         {
             name: "Wonky Donkey",
             filesource: "/1270878-565411-35.jpg",
-            link1: "/Wonky Donkey.html"
+            Story: "/Wonky Donkey.html"
         }
     ]
 
@@ -72,7 +78,7 @@ const DemoPage = (props: Props) => {
                 dummyStoryFiles.map((story) => {
                     return <div className="flex flex-col items-center pt-5 h-[235px] w-[200px] bg-green-800 rounded-lg shirnk-0">
                         <div className="bg-white h-[150px] w-[150px] rounded-lg shirnk-0">
-                            <a href={story.link1}>
+                            <a href={story.Story}>
                                 <img src={story.filesource} alt={story.name} className="object-cover h-[150px] w-[150px] rounded-lg text-center " />
                                 <span style={{ color: 'white', marginTop: '10px', textAlign: 'center' , display: 'block', width: '100%'}}>
                                         {story.name}
