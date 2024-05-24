@@ -67,10 +67,13 @@ const DemoPage = (props: Props) => {
             <div className="flex flex-row gap-10 flex-wrap">
                 {
                 dummyStoryFiles.map((story) => {
-                    return <div className="flex flex-col items-center pt-5 h-[230px] w-[200px] bg-green-800 rounded-lg shirnk-0">
+                    return <div className="flex flex-col items-center pt-5 h-[235px] w-[200px] bg-green-800 rounded-lg shirnk-0">
                         <div className="bg-white h-[150px] w-[150px] rounded-lg shirnk-0">
                             <Link href='/authoring'>
-                                <img src={story.filesource} alt={story.name} className="object-cover h-[150px] w-[150px] rounded-lg text-center " />{story.name }
+                                <img src={story.filesource} alt={story.name} className="object-cover h-[150px] w-[150px] rounded-lg text-center " />
+                                <span style={{ color: 'white', marginTop: '10px', textAlign: 'center' , display: 'block', width: '100%'}}>
+                                        {story.name}
+                                    </span>
                             </Link>
                         </div>
                     </div>
