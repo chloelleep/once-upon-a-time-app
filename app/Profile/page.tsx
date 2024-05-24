@@ -11,16 +11,18 @@ const DemoPage = (props: Props) => {
     const dummyStoryFiles = [
         {
             name: "Three Little Pigs",
-            filesource: "/9ed53026f3c86535be9b9e36efc6a123.jpg"
-
+            filesource: "/9ed53026f3c86535be9b9e36efc6a123.jpg",
+            link1: "/ThreeLittlePigs.html"
         },
         {
             name: "A wolf's Howl",
-            filesource: "/ceccae4a250b2f9f16dd7ee3c90fd05f.jpg"
+            filesource: "/ceccae4a250b2f9f16dd7ee3c90fd05f.jpg",
+            link1: "/ThreeLittlePigs.html"
         },
         {
             name: "Goldilock",
-            filesource: "/f3e62d74100ac55b32028b88a63f3d51.jpg"
+            filesource: "/f3e62d74100ac55b32028b88a63f3d51.jpg",
+            link1: "/ThreeLittlePigs.html"
         },
         {
             name: "Little Red Riding Hood",
@@ -69,12 +71,12 @@ const DemoPage = (props: Props) => {
                 dummyStoryFiles.map((story) => {
                     return <div className="flex flex-col items-center pt-5 h-[235px] w-[200px] bg-green-800 rounded-lg shirnk-0">
                         <div className="bg-white h-[150px] w-[150px] rounded-lg shirnk-0">
-                            <Link href='/authoring'>
+                            <a href={story.link1}>
                                 <img src={story.filesource} alt={story.name} className="object-cover h-[150px] w-[150px] rounded-lg text-center " />
                                 <span style={{ color: 'white', marginTop: '10px', textAlign: 'center' , display: 'block', width: '100%'}}>
                                         {story.name}
                                     </span>
-                            </Link>
+                            </a>
                         </div>
                     </div>
                 })
