@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import ImageToolboxDialog from './_components/Toolbox';
@@ -14,7 +14,7 @@ import {
 import { useCreateBlockNote } from '@blocknote/react';
 import { BlockNoteView, lightDefaultTheme } from '@blocknote/mantine';
 import "@blocknote/mantine/style.css";
-import { Block} from "@blocknote/core";
+import { Block, PartialBlock, BlockNoteEditor } from "@blocknote/core";
 import "@blocknote/core/fonts/inter.css";
 <<<<<<< HEAD
 import Chat from '../Api/page';
@@ -63,15 +63,41 @@ const AuthoringPage: React.FC<Props> = (props) => {
   // Declare hooks inside the functional component
   const [html, setHTML] = useState<string>('');
 
+  async function saveToStorage(jsonBlocks: Block[]) {
+    // Save contents to local storage. You might want to debounce this or replace
+    // with a call to your API / database.
+    localStorage.setItem("editorContent", JSON.stringify(jsonBlocks));
+  }
+
+  async function loadFromStorage() {
+    // Gets the previously stored editor contents.
+    const storageString = localStorage.getItem("editorContent");
+    return storageString
+      ? (JSON.parse(storageString) as PartialBlock[])
+      : undefined;
+  }
+
+  const [initialContent, setInitialContent] = useState<
+    PartialBlock[] | undefined | "loading"
+  >("loading");
+
+  useEffect(() => {
+    loadFromStorage().then((content) => {
+      setInitialContent(content);
+    });
+  }, []);
+
   // Creates a new editor instance with some initial content.
-  const editor = useCreateBlockNote({
-    initialContent: [
-      {
-        type: 'paragraph',
-        content: [],
-      },
-    ],
-  });
+  const editor = useMemo(() => {
+    if (initialContent === "loading") {
+      return undefined;
+    }
+    return BlockNoteEditor.create({ initialContent });
+  }, [initialContent]);
+ 
+  if (editor === undefined) {
+    return "Loading content...";
+  }
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -111,11 +137,7 @@ const AuthoringPage: React.FC<Props> = (props) => {
     // Remove the link from the document
     document.body.removeChild(link);
   };
-  async function saveToStorage(jsonBlocks: Block[]) {
-    // Save contents to local storage. You might want to debounce this or replace
-    // with a call to your API / database.
-    localStorage.setItem("editorContent", JSON.stringify(jsonBlocks));
-  }
+
   return (<div className="flex flex-col w-full h-screen items-center p-10">
   <div className="flex flex-row gap-4"onClick={() => setShowChatDialog(false)}>
     <Link href="/">
@@ -163,7 +185,8 @@ const AuthoringPage: React.FC<Props> = (props) => {
     className="w-full py-6"
     editor={editor}
     onChange={() => {
-      //saveToStorage(editor.document);
+      saveToStorage(editor.document);
+      //loadFromStorage();
       localStorage.setItem("editorContent", JSON.stringify(editor.document));
     }}
 />
