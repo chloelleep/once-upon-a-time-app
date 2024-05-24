@@ -63,14 +63,7 @@ const AuthoringPage = (props: Props) => {
       {
         type: 'paragraph',
         content: [
-          'Hello, ',
-          {
-            type: 'text',
-            text: 'world!',
-            styles: {
-              bold: true,
-            },
-          },
+          'You can start writting your story here...'
         ],
       },
     ],
