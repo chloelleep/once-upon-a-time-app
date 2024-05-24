@@ -16,7 +16,11 @@ import { BlockNoteView, lightDefaultTheme } from '@blocknote/mantine';
 import "@blocknote/mantine/style.css";
 import { Block} from "@blocknote/core";
 import "@blocknote/core/fonts/inter.css";
+<<<<<<< HEAD
+import Chat from '../Api/page';
+=======
 import { stringify } from 'querystring';
+>>>>>>> 6376e624c53bcff34997a49087325b6b4f58fc03
 
 type Props = {}
 
@@ -31,6 +35,11 @@ const AuthoringPage: React.FC<Props> = (props) => {
   };
 
   const [toolboxOpen, setToolboxOpen] = useState(false);
+  const [showChatDialog, setShowChatDialog ] = useState(false);
+
+  const onChatButtonClick = () => {
+    setShowChatDialog(true);
+  }
 
   const handleOpenToolbox = () => {
     setToolboxOpen(true);
@@ -108,7 +117,7 @@ const AuthoringPage: React.FC<Props> = (props) => {
     localStorage.setItem("editorContent", JSON.stringify(jsonBlocks));
   }
   return (<div className="flex flex-col w-full h-screen items-center p-10">
-  <div className="flex flex-row gap-4">
+  <div className="flex flex-row gap-4"onClick={() => setShowChatDialog(false)}>
     <Link href="/">
       <Button>
         <FaArrowLeft />
@@ -159,6 +168,15 @@ const AuthoringPage: React.FC<Props> = (props) => {
     }}
 />
   </div>
+  <Button className="z-[999] float-right" onClick={() => onChatButtonClick()}>
+    AI Chat
+  </Button>
+  {
+    showChatDialog &&
+    <div className="w-[400px] h-[50vh] bg-slate-100 z-[999] absolute top-[25vh] left-[50vw] rounded-xl">
+      <Chat />
+    </div>
+  }
   
 </div>
   );
