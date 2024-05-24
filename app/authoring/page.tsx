@@ -112,9 +112,9 @@ const AuthoringPage = (props: Props) => {
     // with a call to your API / database.
     localStorage.setItem("editorContent", JSON.stringify(jsonBlocks));
   }
-  return (<div className="flex flex-col w-full h-screen items-center p-10">
+  return (<div className="bg-green-100 flex flex-col w-full h-screen items-center p-10">
   <div className="flex flex-row gap-4">
-    <Link href="/">
+    <Link href="/Profile">
       <Button>
         <FaArrowLeft />
       </Button>
@@ -146,7 +146,7 @@ const AuthoringPage = (props: Props) => {
     onClose={handleCloseToolbox}
     onSelectImage={handleSelectImage}
   />
-  <div className="w-full h-full border-2 rounded-lg m-5">
+  <div className="bg-white w-full h-full border-2 border-green-800 rounded-lg m-5">
     <BlockNoteView
     theme={lightDefaultTheme}
     className="w-full py-6"
