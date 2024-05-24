@@ -6,6 +6,7 @@ import ImageToolboxDialog from './_components/Toolbox';
 
 import {
   FaArrowLeft,
+  FaHome,
   FaDownload,
   FaFolderOpen,
   FaPortrait,
@@ -109,27 +110,32 @@ const AuthoringPage = (props: Props) => {
   return (<div className="bg-green-100 flex flex-col w-full h-screen items-center p-10">
   <div className="flex flex-row gap-4">
     <Link href="/Profile">
-      <Button>
+      <Button className="bg-green-900">
         <FaArrowLeft />
       </Button>
     </Link>
-    <Button onClick={handleOpenToolbox}>
+    <Button className="bg-green-900" onClick={handleOpenToolbox}>
       <FaTools />
     </Button>
-    <Button type="button" onClick={handleClick}>
+    <Button className="bg-green-900" type="button" onClick={handleClick}>
       <FaDownload />
     </Button>
-    <Button>
+    <Button className="bg-green-900">
       <FaFolderOpen />
     </Button>
     <Link href="/Profile">
-      <Button>
+      <Button className="bg-green-900">
         <FaPortrait />
       </Button>
     </Link>
     <Link href="/Api">
-      <Button>
+      <Button className="bg-green-900">
         <FaPencilAlt />
+      </Button>
+    </Link>
+    <Link href="/">
+      <Button className="bg-green-900">
+        <FaHome/>
       </Button>
     </Link>
   </div>
