@@ -63,14 +63,8 @@ const AuthoringPage = (props: Props) => {
       {
         type: 'paragraph',
         content: [
-          'Hello, ',
-          {
-            type: 'text',
-            text: 'world!',
-            styles: {
-              bold: true,
-            },
-          },
+          'Start your story here...',
+          
         ],
       },
     ],
@@ -93,7 +87,7 @@ const AuthoringPage = (props: Props) => {
     const link = document.createElement('a');
 
     // Set the download attribute with a filename
-    link.download = 'document.html';
+    link.download = 'MyStory.html';
 
     // Create a URL for the blob
     link.href = URL.createObjectURL(blob);
