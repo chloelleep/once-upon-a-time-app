@@ -7,13 +7,13 @@ export default function Home() {
   return (
     <main className="w-full h-screen font-serif">
       <div className="flex flex-col justify-center items-center h-full">
-        <h1 className="text-8xl mb-10">Once Upon a Time...</h1>
+        <h1 className="text-8xl mb-10 text-emerald-600">Once Upon a Time...</h1>
         <div className="flex flex-row gap-4">
           <Link href="/authoring">
-            <Button>{"Get Started"}</Button>
+            <Button variant="once">{"Get Started"}</Button>
           </Link>
           <Link href="/main">
-            <Button>{"About us"}</Button>
+            <Button variant="once">{"About us"}</Button>
           </Link>
         </div>
       </div>
