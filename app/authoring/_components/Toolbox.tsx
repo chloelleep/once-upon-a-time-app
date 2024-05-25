@@ -1,82 +1,94 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 interface ImageToolboxDialogProps {
-  images: { imageUrl: string; soundUrl: string }[];
+  images: { imageUrl: string, soundUrl: string }[];
   open: boolean;
   onClose: () => void;
   onSelectImage: (image: string) => void;
 }
 
+type ImageDataType = {
+  imageUrl: string,
+  soundUrl: string
+}
+
 const ImageToolboxDialog: React.FC<ImageToolboxDialogProps> = ({ images, open, onClose, onSelectImage }) => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [selectedSound, setSelectedSound] = useState<HTMLAudioElement | null>(null);
+  const [selectedImage, setSelectedImage] = useState<ImageDataType | undefined>(undefined);
+  const [imagePosition, setImagePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
 
-  const handleSelectImageInternal = (image: { imageUrl: string; soundUrl: string }) => {
-    setSelectedImage(image.imageUrl);
+  const handleSelectImageInternal = (image: { imageUrl: string, soundUrl: string }) => {
+    setSelectedImage(image);
     onSelectImage(image.imageUrl);
-    setSelectedSound(new Audio(image.soundUrl));
-    onClose(); // Close the dialog after selecting an image
   };
 
-  const playSound = () => {
-    if (selectedSound) {
-      selectedSound.play();
+  const handleSelectedImageHover = () => {
+    // Play the associated sound
+    console.log("Playing audio....");
+    // TODO: change to dynamic audio
+    const audio = new Audio(selectedImage?.soundUrl);
+    //const audio = new Audio('https://cdn.pixabay.com/audio/2022/03/10/audio_5adfa08633.mp3');
+    setTimeout(() => {audio.pause();}, 2000);
+    audio.play();
+  }
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+    setIsDragging(true);
+    const { clientX, clientY } = e;
+    setImagePosition({ x: clientX, y: clientY });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (isDragging) {
+      const { clientX, clientY } = e;
+      setImagePosition({ x: clientX, y: clientY });
     }
   };
 
-  const handleMouseEnter = () => {
-    if (selectedSound) {
-      selectedSound.play();
-    }
+  const handleMouseUp = () => {
+    setIsDragging(false);
   };
-
-  const handleMouseLeave = () => {
-    if (selectedSound) {
-      selectedSound.pause();
-      selectedSound.currentTime = 0; // Reset sound to start
-    }
-  };
-
-  useEffect(() => {
-    if (selectedSound) {
-      selectedSound.addEventListener('ended', () => {
-        setSelectedSound(null); // Reset selected sound when it ends
-        selectedSound.currentTime = 0; // Reset sound to start
-      });
-    }
-
-    return () => {
-      if (selectedSound) {
-        selectedSound.removeEventListener('ended', () => setSelectedSound(null)); // Clean up event listener
-        selectedSound.pause(); // Pause the sound when the component unmounts
-      }
-    };
-  }, [selectedSound]);
 
   return (
-    <div style={{ display: open ? 'block' : 'none' }}>
-      <div className="image-toolbox-dialog">
-        <div className="image-container">
+    <div
+      style={{
+        display: open ? 'block' : 'none',
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: 'black',
+        padding: '20px',
+        borderRadius: '15px',
+        zIndex: 1000,
+      }}
+    >
+      <div
+        className="image-toolbox-dialog"
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+      >
+        <div className="image-container" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
           {images.map((image, index) => (
             <img
               key={index}
               src={image.imageUrl}
               alt={`img-${index}`}
               className="image-thumbnail"
-              style={{ width: '100px', cursor: 'pointer' }}
+              style={{ width: '100px', cursor: 'pointer', borderRadius: '10px' }}
               onClick={() => handleSelectImageInternal(image)}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
+              onMouseDown={handleMouseDown}
             />
           ))}
         </div>
-        <button onClick={onClose}>Close</button>
+        <button onClick={onClose} style={{ marginTop: '10px', padding: '5px 10px', borderRadius: '5px', display: 'block', color: 'white' }}>
+          Close
+        </button>
       </div>
       {selectedImage && (
         <div>
-          <h3>Selected Image:</h3>
-          <img src={selectedImage} alt="Selected" style={{ width: '150px' }} />
-          <button onClick={playSound}>Play Sound</button>
+          <h3 style={{ color: 'white' }}>Selected Image:</h3>
+          <img src={selectedImage.imageUrl} alt="Selected" style={{ width: '150px', borderRadius: '10px' }} onMouseEnter={() => handleSelectedImageHover()}/>
         </div>
       )}
     </div>
@@ -84,4 +96,3 @@ const ImageToolboxDialog: React.FC<ImageToolboxDialogProps> = ({ images, open, o
 };
 
 export default ImageToolboxDialog;
-

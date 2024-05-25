@@ -1,37 +1,44 @@
-'use client';
-import React, { useState } from 'react';
-import Link from 'next/link';
+"use client";
+import React, { useRef, useState, useEffect, useMemo } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import ImageToolboxDialog from './_components/Toolbox';
-
+import ImageToolboxDialog from "./_components/Toolbox";
 import {
   FaArrowLeft,
   FaDownload,
   FaFolderOpen,
   FaPortrait,
   FaPencilAlt,
-  FaTools
+  FaTools,
+  FaImages,
 } from "react-icons/fa";
-//import styled from "styled-components";
-//import { upload } from 'upload';
-//import Uploady from "@rpldy/uploady";
-//import UploadButton from "@rpldy/upload-button";
-
-//const App = () => (<Uploady
-//destination={{ url: "http://localhost:3000/authoring" }}>
-//  <UploadButton/>
-//</Uploady>);
-
-import { useCreateBlockNote } from '@blocknote/react';
-import { BlockNoteView, lightDefaultTheme } from '@blocknote/mantine';
+import { useCreateBlockNote } from "@blocknote/react";
+import { BlockNoteView, lightDefaultTheme } from "@blocknote/mantine";
 import "@blocknote/mantine/style.css";
-import { Block} from "@blocknote/core";
+import { Block, PartialBlock, BlockNoteEditor } from "@blocknote/core";
 import "@blocknote/core/fonts/inter.css";
+import Chat from "../api/page";
+import { stringify } from "querystring";
+import { ArrowRight } from "lucide-react";
 
-type Props = {}
+type Props = {};
 
 const AuthoringPage = (props: Props) => {
   const [toolboxOpen, setToolboxOpen] = useState(false);
+  const [showChatDialog, setShowChatDialog] = useState(false);
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [file, setFile] = useState<File | undefined>();
+
+  const handleFolderOpenClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const onChatButtonClick = () => {
+    setShowChatDialog(true);
+  };
 
   const handleOpenToolbox = () => {
     setToolboxOpen(true);
@@ -47,32 +54,74 @@ const AuthoringPage = (props: Props) => {
   };
 
   const images = [
-    { imageUrl: 'https://laotiantimes.com/wp-content/uploads/2016/08/rainjpeg.jpg', soundUrl: 'https://www.epidemicsound.com/track/D8n3lMZZQH/' },
-    { imageUrl: 'https://th.bing.com/th/id/OIP.UGUgWT7EvzusNcTl-aKKvwHaE8?rs=1&pid=ImgDetMain', soundUrl: 'https://pixabay.com/sound-effects/075176-duck-quack-40345/' },
-    { imageUrl: 'https://th.bing.com/th/id/R.1d8b77786649f352eca392ca48f348d6?rik=6AlDF0gCYhA0nQ&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f07%2fCute-Baby-Animal-Photo-Free-Download.jpg&ehk=0iddreAFFy0Gw6IM6zCsZ1orEWRLt72nnqUnu6831pA%3d&risl=&pid=ImgRaw&r=0', soundUrl:'https://pixabay.com/sound-effects/cat-98721/' }
+    {
+      imageUrl:
+        "https://laotiantimes.com/wp-content/uploads/2016/08/rainjpeg.jpg",
+      soundUrl:
+        "https://cdn.pixabay.com/download/audio/2024/05/14/audio_ec8f1e52ad.mp3?filename=heavy-rain-on-steel-roof-208929.mp3",
+    },
+    {
+      imageUrl:
+        "https://th.bing.com/th/id/OIP.UGUgWT7EvzusNcTl-aKKvwHaE8?rs=1&pid=ImgDetMain",
+      soundUrl: "https://cdn.pixabay.com/audio/2022/03/10/audio_5adfa08633.mp3",
+    },
+    {
+      imageUrl:
+        "https://th.bing.com/th/id/R.1d8b77786649f352eca392ca48f348d6?rik=6AlDF0gCYhA0nQ&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f07%2fCute-Baby-Animal-Photo-Free-Download.jpg&ehk=0iddreAFFy0Gw6IM6zCsZ1orEWRLt72nnqUnu6831pA%3d&risl=&pid=ImgRaw&r=0",
+      soundUrl: "https://cdn.pixabay.com/audio/2022/03/21/audio_9fd39ce300.mp3",
+    },
   ];
 
-
-
   // Declare hooks inside the functional component
-  const [html, setHTML] = useState<string>('');
+  const [html, setHTML] = useState<string>("");
+
+  async function saveToStorage(jsonBlocks: Block[]) {
+    // Save contents to local storage. You might want to debounce this or replace
+    // with a call to your API / database.
+    localStorage.setItem("editorContent", JSON.stringify(jsonBlocks));
+  }
+
+  async function loadFromStorage() {
+    // Gets the previously stored editor contents.
+    const storageString = localStorage.getItem("editorContent");
+    return storageString
+      ? (JSON.parse(storageString) as PartialBlock[])
+      : undefined;
+  }
+
+  const [initialContent, setInitialContent] = useState<
+    PartialBlock[] | undefined | "loading"
+  >("loading");
+
+  useEffect(() => {
+    loadFromStorage().then((content) => {
+      setInitialContent(content);
+    });
+  }, []);
 
   // Creates a new editor instance with some initial content.
-  const editor = useCreateBlockNote({
-    initialContent: [
-      {
-        type: 'paragraph',
-        content: [
-          'You can start writting your story here...'
-        ],
-      },
-    ],
-  });
+  const editor = useMemo(() => {
+    if (initialContent === "loading") {
+      return undefined;
+    }
+    return BlockNoteEditor.create({ initialContent });
+  }, [initialContent]);
 
-  const onChange = async () => {
-    // Converts the editor's contents from Block objects to HTML and store to state.
-    const html = await editor.blocksToHTMLLossy(editor.document);
-    setHTML(html);
+  if (editor === undefined) {
+    return "Loading content...";
+  }
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const htmlContent = e.target?.result as string;
+        const blocks = await editor.tryParseHTMLToBlocks(htmlContent);
+        editor.replaceBlocks(editor.document, blocks);
+      };
+      reader.readAsText(file);
+    }
   };
 
   const handleClick = async () => {
@@ -80,13 +129,13 @@ const AuthoringPage = (props: Props) => {
     const html = await editor.blocksToHTMLLossy(editor.document);
 
     // Create a blob from the HTML content
-    const blob = new Blob([html], { type: 'text/html' });
+    const blob = new Blob([html], { type: "text/html" });
 
     // Create a temporary link element
-    const link = document.createElement('a');
+    const link = document.createElement("a");
 
     // Set the download attribute with a filename
-    link.download = 'document.html';
+    link.download = "document.html";
 
     // Create a URL for the blob
     link.href = URL.createObjectURL(blob);
@@ -100,59 +149,100 @@ const AuthoringPage = (props: Props) => {
     // Remove the link from the document
     document.body.removeChild(link);
   };
-  async function saveToStorage(jsonBlocks: Block[]) {
-    // Save contents to local storage. You might want to debounce this or replace
-    // with a call to your API / database.
-    localStorage.setItem("editorContent", JSON.stringify(jsonBlocks));
-  }
-  return (<div className="bg-green-100 flex flex-col w-full h-screen items-center p-10">
-  <div className="flex flex-row gap-4">
-    <Link href="/Profile">
-      <Button className='bg-green-900'>
-        <FaArrowLeft />
-      </Button>
-    </Link>
-    <Button className='bg-green-900' onClick={handleOpenToolbox}>
-      <FaTools />
-    </Button>
-    <Button className='bg-green-900' type="button" onClick={handleClick}>
-      <FaDownload />
-    </Button>
-    <Button className='bg-green-900'>
-      <FaFolderOpen />
-    </Button>
-    <Link href="/Profile">
-      <Button className='bg-green-900'>
-        <FaPortrait />
-      </Button>
-    </Link>
-    <Link href="/Api">
-      <Button className='bg-green-900'>
-        <FaPencilAlt />
-      </Button>
-    </Link>
-  </div>
-  
-  <ImageToolboxDialog
-    images={images}
-    open={toolboxOpen}
-    onClose={handleCloseToolbox}
-    onSelectImage={handleSelectImage}
-  />
-  <div className="bg-white w-full h-full border-2 border-green-800 rounded-lg m-5">
-    <BlockNoteView
-    theme={lightDefaultTheme}
-    className="w-full py-6"
-    editor={editor}
-    onChange={() => {
-      saveToStorage(editor.document);
-    }}
-/>
-  </div>
-  
-</div>
+
+  return (
+    <>
+      <div className="h-60[px] w-full flex flex-row items-center px-6">
+        <section className="flex flex-row items-center gap-2">
+          <img
+            src="/storybook.webp"
+            alt="storybook image"
+            className="h-[60px]"
+          />
+          <h1 className="text-xl text-emerald-600"> Once Upon a Time</h1>
+        </section>
+      </div>
+      <div className="flex flex-col w-full h-screen items-center p-10">
+        <div className="flex flex-row gap-4">
+          <Link href="/">
+            <Button className="bg-emerald-900">
+              <FaArrowLeft />
+            </Button>
+          </Link>
+          <Button className="bg-emerald-900" onClick={handleOpenToolbox}>
+            <FaTools />
+          </Button>
+          <Button
+            className="bg-emerald-900"
+            type="button"
+            onClick={handleClick}
+          >
+            <FaDownload />
+          </Button>
+          <Button className="bg-emerald-900" onClick={handleFolderOpenClick}>
+            <FaFolderOpen />
+            <input
+              type="file"
+              name="textfile"
+              style={{ display: "none" }}
+              ref={fileInputRef}
+              onChange={handleFileChange}
+            />
+          </Button>
+          <Link href="/profile">
+            <Button className="bg-emerald-900">
+              <FaPortrait />
+            </Button>
+          </Link>
+          <Link href="/Api">
+            <Button className="bg-emerald-900">
+              <FaPencilAlt />
+            </Button>
+          </Link>
+        </div>
+
+        <ImageToolboxDialog
+          images={images}
+          open={toolboxOpen}
+          onClose={handleCloseToolbox}
+          onSelectImage={handleSelectImage}
+        />
+        <div className="w-[90vw] h-full border-2 rounded-lg m-5">
+          <BlockNoteView
+            theme={lightDefaultTheme}
+            className="w-full py-6"
+            editor={editor}
+            onChange={() => {
+              saveToStorage(editor.document);
+              //loadFromStorage();
+              localStorage.setItem(
+                "editorContent",
+                JSON.stringify(editor.document)
+              );
+            }}
+          />
+        </div>
+        <Button
+          className="z-[999] float-right mb-6 bg-emerald-600"
+          onClick={() => onChatButtonClick()}
+        >
+          AI Chat
+        </Button>
+        {showChatDialog && (
+          <div className="w-full h-screen flex flex-col items-center justify-center z-[99999] fixed">
+            <div className="w-[400px] h-[500px] relative rounded-xl border-2 overflow-x-scroll">
+              <Chat />
+            </div>
+            <Button
+              className="relative bottom-20"
+              onClick={() => setShowChatDialog(false)}
+            >
+              Close
+            </Button>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
-//<Button type="button" onClick={handleClick}><FaDownload /></Button>
 export default AuthoringPage;
-
