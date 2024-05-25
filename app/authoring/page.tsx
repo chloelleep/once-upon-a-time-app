@@ -10,6 +10,7 @@ import {
   FaPortrait,
   FaPencilAlt,
   FaTools,
+  FaImages,
 } from "react-icons/fa";
 import { useCreateBlockNote } from "@blocknote/react";
 import { BlockNoteView, lightDefaultTheme } from "@blocknote/mantine";
@@ -56,17 +57,18 @@ const AuthoringPage: React.FC<Props> = (props) => {
     {
       imageUrl:
         "https://laotiantimes.com/wp-content/uploads/2016/08/rainjpeg.jpg",
-      soundUrl: "https://www.epidemicsound.com/track/D8n3lMZZQH/",
+      soundUrl:
+        "https://cdn.pixabay.com/download/audio/2024/05/14/audio_ec8f1e52ad.mp3?filename=heavy-rain-on-steel-roof-208929.mp3",
     },
     {
       imageUrl:
         "https://th.bing.com/th/id/OIP.UGUgWT7EvzusNcTl-aKKvwHaE8?rs=1&pid=ImgDetMain",
-      soundUrl: "https://pixabay.com/sound-effects/075176-duck-quack-40345/",
+      soundUrl: "https://cdn.pixabay.com/audio/2022/03/10/audio_5adfa08633.mp3",
     },
     {
       imageUrl:
         "https://th.bing.com/th/id/R.1d8b77786649f352eca392ca48f348d6?rik=6AlDF0gCYhA0nQ&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f07%2fCute-Baby-Animal-Photo-Free-Download.jpg&ehk=0iddreAFFy0Gw6IM6zCsZ1orEWRLt72nnqUnu6831pA%3d&risl=&pid=ImgRaw&r=0",
-      soundUrl: "https://pixabay.com/sound-effects/cat-98721/",
+      soundUrl: "https://cdn.pixabay.com/audio/2022/03/21/audio_9fd39ce300.mp3",
     },
   ];
 
@@ -149,7 +151,7 @@ const AuthoringPage: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex flex-col w-full h-screen items-center">
+    <div className="flex flex-col w-full h-screen items-center p-10">
       <div className="h-60[px] w-full flex flex-row items-center px-6">
         <section className="flex flex-row items-center gap-2">
           <img
@@ -200,7 +202,6 @@ const AuthoringPage: React.FC<Props> = (props) => {
         onClose={handleCloseToolbox}
         onSelectImage={handleSelectImage}
       />
-
       <div className="w-[90vw] h-full border-2 rounded-lg m-5">
         <BlockNoteView
           theme={lightDefaultTheme}
