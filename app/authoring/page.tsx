@@ -16,11 +16,9 @@ import { BlockNoteView, lightDefaultTheme } from '@blocknote/mantine';
 import "@blocknote/mantine/style.css";
 import { Block, PartialBlock, BlockNoteEditor } from "@blocknote/core";
 import "@blocknote/core/fonts/inter.css";
-<<<<<<< HEAD
 import Chat from '../Api/page';
-=======
 import { stringify } from 'querystring';
->>>>>>> 6376e624c53bcff34997a49087325b6b4f58fc03
+
 
 type Props = {}
 
