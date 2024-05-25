@@ -224,7 +224,7 @@ const AuthoringPage: React.FC<Props> = (props) => {
       </Button>
       {showChatDialog && (
         <div className="w-full h-screen flex flex-col items-center justify-center z-[99999] fixed">
-          <div className="w-[400px] h-[500px] bg-slate-100 relative rounded-xl border-2">
+          <div className="w-[400px] h-[500px] relative rounded-xl border-2 overflow-x-scroll">
             <Chat />
           </div>
           <Button

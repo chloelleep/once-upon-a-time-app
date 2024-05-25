@@ -10,7 +10,7 @@ interface MessageProps {
 
 enum Creator {
   Me = "Me",
-  Bot = "Bot",
+  Bot = "Helper",
 }
 
 const ChatInput: React.FC<{
@@ -68,9 +68,15 @@ const ChatMessage: React.FC<{ text: string; from: string }> = ({
   text,
   from,
 }) => {
+  const colorStyles = from === "Me" ? "ml-auto text-sky-700" : "";
   return (
-    <div>
-      <strong>{from}:</strong> {text}
+    <div
+      className={`${colorStyles} p-4 bg-slate-200 rounded-2xl w-fit min-w-[50px]`}
+    >
+      <h3 className="text-xl">
+        <strong>{from}</strong>
+      </h3>
+      <p>{text}</p>
     </div>
   );
 };
@@ -143,7 +149,7 @@ export default function Chat() {
         </section>
       </div>
       <main className="relative max-w-2xl mx-auto">
-        <div className="sticky top-0 w-full pt-10 px-4">
+        <div className="sticky top-0 w-full p-5 px-4 bg-white">
           <h1
             style={{
               fontSize: "2rem",
@@ -158,7 +164,7 @@ export default function Chat() {
           <ChatInput onSend={(input) => callApi(input)} disabled={loading} />
         </div>
 
-        <div className="mt-10 px-4">
+        <div className="flex flex-col h-[600px] my-10 px-4 gap-4 overflow-y-scroll">
           {messages.map((msg: MessageProps) => (
             <ChatMessage key={msg.key} text={msg.text} from={msg.from} />
           ))}
