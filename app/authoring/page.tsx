@@ -1,26 +1,26 @@
-'use client';
-import React, { useRef, useState, useEffect, useMemo } from 'react';
-import Link from 'next/link';
+"use client";
+import React, { useRef, useState, useEffect, useMemo } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import ImageToolboxDialog from './_components/Toolbox';
+import ImageToolboxDialog from "./_components/Toolbox";
 import {
   FaArrowLeft,
   FaDownload,
   FaFolderOpen,
   FaPortrait,
   FaPencilAlt,
-  FaTools
+  FaTools,
 } from "react-icons/fa";
-import { useCreateBlockNote } from '@blocknote/react';
-import { BlockNoteView, lightDefaultTheme } from '@blocknote/mantine';
+import { useCreateBlockNote } from "@blocknote/react";
+import { BlockNoteView, lightDefaultTheme } from "@blocknote/mantine";
 import "@blocknote/mantine/style.css";
 import { Block, PartialBlock, BlockNoteEditor } from "@blocknote/core";
 import "@blocknote/core/fonts/inter.css";
-import Chat from '../Api/page';
-import { stringify } from 'querystring';
+import Chat from "../Api/page";
+import { stringify } from "querystring";
+import { ArrowRight } from "lucide-react";
 
-
-type Props = {}
+type Props = {};
 
 const AuthoringPage: React.FC<Props> = (props) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -33,11 +33,11 @@ const AuthoringPage: React.FC<Props> = (props) => {
   };
 
   const [toolboxOpen, setToolboxOpen] = useState(false);
-  const [showChatDialog, setShowChatDialog ] = useState(false);
+  const [showChatDialog, setShowChatDialog] = useState(false);
 
   const onChatButtonClick = () => {
     setShowChatDialog(true);
-  }
+  };
 
   const handleOpenToolbox = () => {
     setToolboxOpen(true);
@@ -53,13 +53,25 @@ const AuthoringPage: React.FC<Props> = (props) => {
   };
 
   const images = [
-    { imageUrl: 'https://laotiantimes.com/wp-content/uploads/2016/08/rainjpeg.jpg', soundUrl: 'https://www.epidemicsound.com/track/D8n3lMZZQH/' },
-    { imageUrl: 'https://th.bing.com/th/id/OIP.UGUgWT7EvzusNcTl-aKKvwHaE8?rs=1&pid=ImgDetMain', soundUrl: 'https://pixabay.com/sound-effects/075176-duck-quack-40345/' },
-    { imageUrl: 'https://th.bing.com/th/id/R.1d8b77786649f352eca392ca48f348d6?rik=6AlDF0gCYhA0nQ&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f07%2fCute-Baby-Animal-Photo-Free-Download.jpg&ehk=0iddreAFFy0Gw6IM6zCsZ1orEWRLt72nnqUnu6831pA%3d&risl=&pid=ImgRaw&r=0', soundUrl:'https://pixabay.com/sound-effects/cat-98721/' }
+    {
+      imageUrl:
+        "https://laotiantimes.com/wp-content/uploads/2016/08/rainjpeg.jpg",
+      soundUrl: "https://www.epidemicsound.com/track/D8n3lMZZQH/",
+    },
+    {
+      imageUrl:
+        "https://th.bing.com/th/id/OIP.UGUgWT7EvzusNcTl-aKKvwHaE8?rs=1&pid=ImgDetMain",
+      soundUrl: "https://pixabay.com/sound-effects/075176-duck-quack-40345/",
+    },
+    {
+      imageUrl:
+        "https://th.bing.com/th/id/R.1d8b77786649f352eca392ca48f348d6?rik=6AlDF0gCYhA0nQ&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f07%2fCute-Baby-Animal-Photo-Free-Download.jpg&ehk=0iddreAFFy0Gw6IM6zCsZ1orEWRLt72nnqUnu6831pA%3d&risl=&pid=ImgRaw&r=0",
+      soundUrl: "https://pixabay.com/sound-effects/cat-98721/",
+    },
   ];
 
   // Declare hooks inside the functional component
-  const [html, setHTML] = useState<string>('');
+  const [html, setHTML] = useState<string>("");
 
   async function saveToStorage(jsonBlocks: Block[]) {
     // Save contents to local storage. You might want to debounce this or replace
@@ -92,7 +104,7 @@ const AuthoringPage: React.FC<Props> = (props) => {
     }
     return BlockNoteEditor.create({ initialContent });
   }, [initialContent]);
- 
+
   if (editor === undefined) {
     return "Loading content...";
   }
@@ -115,13 +127,13 @@ const AuthoringPage: React.FC<Props> = (props) => {
     const html = await editor.blocksToHTMLLossy(editor.document);
 
     // Create a blob from the HTML content
-    const blob = new Blob([html], { type: 'text/html' });
+    const blob = new Blob([html], { type: "text/html" });
 
     // Create a temporary link element
-    const link = document.createElement('a');
+    const link = document.createElement("a");
 
     // Set the download attribute with a filename
-    link.download = 'document.html';
+    link.download = "document.html";
 
     // Create a URL for the blob
     link.href = URL.createObjectURL(blob);
@@ -136,71 +148,94 @@ const AuthoringPage: React.FC<Props> = (props) => {
     document.body.removeChild(link);
   };
 
-  return (<div className="flex flex-col w-full h-screen items-center p-10">
-  <div className="flex flex-row gap-4"onClick={() => setShowChatDialog(false)}>
-    <Link href="/">
-      <Button>
-        <FaArrowLeft />
-      </Button>
-    </Link>
-    <Button onClick={handleOpenToolbox}>
-      <FaTools />
-    </Button>
-    <Button type="button" onClick={handleClick}>
-      <FaDownload />
-    </Button>
-    <Button onClick={handleFolderOpenClick}>
-      <FaFolderOpen />
-        <input
-          type="file"
-          name="textfile"
-          style={{ display: 'none' }}
-          ref={fileInputRef}
-          onChange={handleFileChange}
+  return (
+    <div className="flex flex-col w-full h-screen items-center">
+      <div className="h-60[px] w-full flex flex-row items-center px-6">
+        <section className="flex flex-row items-center gap-2">
+          <img
+            src="/storybook.webp"
+            alt="storybook image"
+            className="h-[60px]"
+          />
+          <h1 className="text-xl text-emerald-600"> Once Upon a Time</h1>
+        </section>
+      </div>
+      <div className="flex flex-row gap-4">
+        <Link href="/">
+          <Button>
+            <FaArrowLeft />
+          </Button>
+        </Link>
+        <Button onClick={handleOpenToolbox}>
+          <FaTools />
+        </Button>
+        <Button type="button" onClick={handleClick}>
+          <FaDownload />
+        </Button>
+        <Button onClick={handleFolderOpenClick}>
+          <FaFolderOpen />
+          <input
+            type="file"
+            name="textfile"
+            style={{ display: "none" }}
+            ref={fileInputRef}
+            onChange={handleFileChange}
+          />
+        </Button>
+        <Link href="/profile">
+          <Button>
+            <FaPortrait />
+          </Button>
+        </Link>
+        <Link href="/Api">
+          <Button>
+            <FaPencilAlt />
+          </Button>
+        </Link>
+      </div>
+
+      <ImageToolboxDialog
+        images={images}
+        open={toolboxOpen}
+        onClose={handleCloseToolbox}
+        onSelectImage={handleSelectImage}
+      />
+
+      <div className="w-[90vw] h-full border-2 rounded-lg m-5">
+        <BlockNoteView
+          theme={lightDefaultTheme}
+          className="w-full py-6"
+          editor={editor}
+          onChange={() => {
+            saveToStorage(editor.document);
+            //loadFromStorage();
+            localStorage.setItem(
+              "editorContent",
+              JSON.stringify(editor.document)
+            );
+          }}
         />
-    </Button>
-    <Link href="/profile">
-      <Button>
-        <FaPortrait />
+      </div>
+      <Button
+        className="z-[999] float-right mb-6"
+        onClick={() => onChatButtonClick()}
+      >
+        AI Chat
       </Button>
-    </Link>
-    <Link href="/Api">
-      <Button>
-        <FaPencilAlt />
-      </Button>
-    </Link>
-  </div>
-  
-  <ImageToolboxDialog
-    images={images}
-    open={toolboxOpen}
-    onClose={handleCloseToolbox}
-    onSelectImage={handleSelectImage}
-  />
-  <div className="w-full h-full border-2 rounded-lg m-5">
-    <BlockNoteView
-    theme={lightDefaultTheme}
-    className="w-full py-6"
-    editor={editor}
-    onChange={() => {
-      saveToStorage(editor.document);
-      //loadFromStorage();
-      localStorage.setItem("editorContent", JSON.stringify(editor.document));
-    }}
-/>
-  </div>
-  <Button className="z-[999] float-right" onClick={() => onChatButtonClick()}>
-    AI Chat
-  </Button>
-  {
-    showChatDialog &&
-    <div className="w-[400px] h-[50vh] bg-slate-100 z-[999] absolute top-[25vh] left-[50vw] rounded-xl">
-      <Chat />
+      {showChatDialog && (
+        <div className="w-full h-screen flex flex-col items-center justify-center z-[99999] fixed">
+          <div className="w-[400px] h-[500px] bg-slate-100 relative rounded-xl border-2">
+            <Chat />
+          </div>
+          <Button
+            className="relative bottom-20"
+            onClick={() => setShowChatDialog(false)}
+          >
+            Close
+          </Button>
+        </div>
+      )}
     </div>
-  }
-  
-</div>
   );
 };
-//<Button type="button" onClick={handleClick}><FaDownload /></Button>
 export default AuthoringPage;
