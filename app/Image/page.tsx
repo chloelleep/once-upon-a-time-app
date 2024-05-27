@@ -2,7 +2,6 @@
 import Link from "next/link";
 import OpenAI from "openai";
 import { useState } from "react";
-import "./app.css";
 
 function Image() {
   const [prompt, setPrompt] = useState("");
