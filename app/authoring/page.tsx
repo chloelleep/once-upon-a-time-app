@@ -14,7 +14,7 @@ import {
   FaPortrait,
   FaTools,
 } from "react-icons/fa";
-import Chat from "../api/page";
+import Chat from "../ai-api/page";
 import ImageToolboxDialog from "./_components/Toolbox";
 
 type Props = {};

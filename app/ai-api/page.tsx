@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import React, { useEffect, useRef, useState } from "react";
 
 interface MessageProps {
   text: string;
