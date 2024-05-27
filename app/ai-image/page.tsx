@@ -52,7 +52,7 @@ function Image() {
             alt="result"
           />
         )}
-        <Link href="/api">
+        <Link href="/ai-api">
           <div
             style={{
               position: "fixed",

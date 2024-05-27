@@ -203,7 +203,7 @@ export default function Chat() {
           </div>
         </Link>
 
-        <Link href="/Image">
+        <Link href="/ai-image">
           <div
             style={{
               position: "fixed",

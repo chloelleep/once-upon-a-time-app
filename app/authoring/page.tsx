@@ -190,7 +190,7 @@ const AuthoringPage = (props: Props) => {
               <FaPortrait />
             </Button>
           </Link>
-          <Link href="/api">
+          <Link href="/ai-api">
             <Button className="bg-emerald-900">
               <FaPencilAlt />
             </Button>
