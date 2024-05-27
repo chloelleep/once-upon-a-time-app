@@ -226,7 +226,7 @@ const AuthoringPage = (props: Props) => {
         </Button>
         {showChatDialog && (
           <div className="w-full h-screen flex flex-col items-center justify-center z-[99999] fixed">
-            <div className="w-[400px] h-[500px] relative rounded-xl border-2 overflow-x-scroll">
+            <div className="w-[400px] h-[500px] relative rounded-xl border-2 overflow-x-scroll bg-white">
               <Chat />
             </div>
             <Button
