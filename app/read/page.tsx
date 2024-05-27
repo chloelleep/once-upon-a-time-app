@@ -83,7 +83,7 @@ const ReadPage = (props: Props) => {
         </div>
         {title && storyUrl && (
           <main className="w-full h-screen px-48 pt-10 pb-24">
-            <Link href="/profile">
+            <Link href="/home">
               <Button className="bg-emerald-900 my-2">
                 <ArrowLeft />
               </Button>

@@ -185,7 +185,7 @@ const AuthoringPage = (props: Props) => {
               onChange={handleFileChange}
             />
           </Button>
-          <Link href="/profile">
+          <Link href="/home">
             <Button className="bg-emerald-900">
               <FaPortrait />
             </Button>

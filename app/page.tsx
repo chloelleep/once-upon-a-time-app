@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
           <h1 className="text-xl text-emerald-600"> Once Upon a Time</h1>
         </section>
         <section className="ml-auto">
-          <Link href="/Profile">
+          <Link href="/home">
             <Button variant="once">
               {"Get Started"} <ArrowRight />
             </Button>
