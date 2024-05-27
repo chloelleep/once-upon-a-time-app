@@ -15,7 +15,7 @@ export default function Home() {
           <h1 className="text-xl text-emerald-600"> Once Upon a Time</h1>
         </section>
         <section className="ml-auto">
-          <Link href="/authoring">
+          <Link href="/Profile">
             <Button variant="once">
               {"Get Started"} <ArrowRight />
             </Button>
@@ -30,7 +30,7 @@ export default function Home() {
         <h1 className="text-8xl mb-10 ">Once Upon a Time</h1>
         <img src="/storybook.webp" alt="storybook image" className="w-[25vw]" />
         <div className="flex flex-row gap-4">
-          <Link href="/profile">
+          <Link href="/authoring">
             <Button className="mb-10 bg-emerald-600">
               {"Get Started, Write Now"} <ArrowRight />
             </Button>
