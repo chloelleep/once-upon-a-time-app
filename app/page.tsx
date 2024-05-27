@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function Home() {
   return (
-    <main className="w-full h-screen font-serif text-center">
+    <main className="w-full h-screen text-center">
       <div className="h-60[px] w-full flex flex-row items-center px-6">
         <section className="flex flex-row items-center gap-2">
           <img
@@ -30,13 +30,13 @@ export default function Home() {
         <h1 className="text-8xl mb-10 ">Once Upon a Time</h1>
         <img src="/storybook.webp" alt="storybook image" className="w-[25vw]" />
         <div className="flex flex-row gap-4">
-          <Link href="/authoring">
-            <Button variant="once">
+          <Link href="/profile">
+            <Button className="mb-10 bg-emerald-600">
               {"Get Started, Write Now"} <ArrowRight />
             </Button>
           </Link>
           <Link href="/main">
-            <Button variant="once">{"About us"}</Button>
+            <Button className="mb-10 bg-emerald-600">{"About us"}</Button>
           </Link>
         </div>
       </div>
