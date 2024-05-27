@@ -9,6 +9,7 @@ import {
   FaDownload,
   FaFolderOpen,
   FaPortrait,
+  FaRobot,
   FaPencilAlt,
   FaTools
 } from "react-icons/fa";
@@ -123,7 +124,7 @@ const AuthoringPage = (props: Props) => {
       </Button>
     </Link>
     <Button onClick={handleOpenToolbox}>
-      <FaTools />
+      <FaPencilAlt />
     </Button>
     <Button type="button" onClick={handleClick}>
       <FaDownload />
@@ -136,7 +137,7 @@ const AuthoringPage = (props: Props) => {
     </Button>
     <Link href="/Api">
       <Button>
-        <FaPencilAlt />
+        <FaRobot/>
       </Button>
     </Link>
   </div>
