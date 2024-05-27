@@ -203,7 +203,7 @@ const AuthoringPage = (props: Props) => {
           onClose={handleCloseToolbox}
           onSelectImage={handleSelectImage}
         />
-        <div className="w-[90vw] h-full border-2 rounded-lg m-5">
+        <div className="w-[90vw] h-full border-2 rounded-lg m-5 overflow-x-scroll">
           <BlockNoteView
             theme={lightDefaultTheme}
             className="w-full py-6"
