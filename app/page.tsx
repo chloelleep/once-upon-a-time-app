@@ -15,7 +15,7 @@ export default function Home() {
           <h1 className="text-xl text-emerald-600"> Once Upon a Time</h1>
         </section>
         <section className="ml-auto">
-          <Link href="/authoring">
+          <Link href="/Profile">
             <Button variant="once">
               {"Get Started"} <ArrowRight />
             </Button>
