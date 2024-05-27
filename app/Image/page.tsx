@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
-import OpenAI from "openai";
-import "./app.css";
 import Link from "next/link";
+import OpenAI from "openai";
+import { useState } from "react";
+import "./app.css";
 
 function Image() {
   const [prompt, setPrompt] = useState("");
@@ -53,7 +53,7 @@ function Image() {
             alt="result"
           />
         )}
-        <Link href="/Api">
+        <Link href="/api">
           <div
             style={{
               position: "fixed",

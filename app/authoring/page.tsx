@@ -1,25 +1,21 @@
 "use client";
-import React, { useRef, useState, useEffect, useMemo } from "react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import ImageToolboxDialog from "./_components/Toolbox";
+import { Block, BlockNoteEditor, PartialBlock } from "@blocknote/core";
+import "@blocknote/core/fonts/inter.css";
+import { BlockNoteView, lightDefaultTheme } from "@blocknote/mantine";
+import "@blocknote/mantine/style.css";
+import Link from "next/link";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   FaArrowLeft,
   FaDownload,
   FaFolderOpen,
-  FaPortrait,
   FaPencilAlt,
+  FaPortrait,
   FaTools,
-  FaImages,
 } from "react-icons/fa";
-import { useCreateBlockNote } from "@blocknote/react";
-import { BlockNoteView, lightDefaultTheme } from "@blocknote/mantine";
-import "@blocknote/mantine/style.css";
-import { Block, PartialBlock, BlockNoteEditor } from "@blocknote/core";
-import "@blocknote/core/fonts/inter.css";
 import Chat from "../api/page";
-import { stringify } from "querystring";
-import { ArrowRight } from "lucide-react";
+import ImageToolboxDialog from "./_components/Toolbox";
 
 type Props = {};
 
@@ -194,7 +190,7 @@ const AuthoringPage = (props: Props) => {
               <FaPortrait />
             </Button>
           </Link>
-          <Link href="/Api">
+          <Link href="/api">
             <Button className="bg-emerald-900">
               <FaPencilAlt />
             </Button>
