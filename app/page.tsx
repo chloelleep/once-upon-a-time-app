@@ -30,7 +30,7 @@ export default function Home() {
         <h1 className="text-8xl mb-10 ">Once Upon a Time</h1>
         <img src="/storybook.webp" alt="storybook image" className="w-[25vw]" />
         <div className="flex flex-row gap-4">
-          <Link href="/profile">
+          <Link href="/authoring">
             <Button className="mb-10 bg-emerald-600">
               {"Get Started, Write Now"} <ArrowRight />
             </Button>
