@@ -14,9 +14,11 @@ const NavBar = (props: Props) => {
       </section>
       <section className="flex flex-row items-center gap-2">
         <Button className="bg-emerald-700">Help Me</Button>
-        <Button className="bg-emerald-700 text-3xl">
-          <FaPortrait></FaPortrait>
-        </Button>
+        <Link href="/profile">
+          <Button className="bg-emerald-700 text-3xl">
+            <FaPortrait></FaPortrait>
+          </Button>
+        </Link>
       </section>
     </div>
   );
