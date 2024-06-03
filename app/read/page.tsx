@@ -73,7 +73,7 @@ const ReadPage = (props: Props) => {
                 <ArrowLeft />
               </Button>
             </Link>
-            <div className="w-full h-full border-2 rounded-2xl relative p-4">
+            <div className="w-full h-full border-2 rounded-2xl relative p-4 overflow-hidden">
               <h1 className="text-center text-2xl">{title}</h1>
               <iframe
                 title={title}
