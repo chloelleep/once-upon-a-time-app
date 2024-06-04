@@ -5,7 +5,8 @@ let activeImage = null;
 
 const images = document.querySelectorAll('img');
 
-const audio1 = new Audio('audio/oink-40664.mp3');
+const audio1 = new Audio('https://cdn.pixabay.com/download/audio/2022/03/10/audio_1d0ef3b7be.mp3?filename=oink-40664.mp3');
+const audio2 = new Audio('https://www.televisiontunes.com/uploads/audio/Peppa%20Pig.mp3');
 
 audio1.muted = false;
 
@@ -26,6 +27,12 @@ images.forEach(image => {
 		if (imageId === 'image1' || imageId === 'image_b_1') {
 			console.log('Image 1 selected');
 			audio1.play();
+			
+		} 
+		else if (imageId === 'image2') {
+			console.log('Image 2 selected');
+			audio2.play();
+			
 		} 
 	});
 
@@ -33,6 +40,8 @@ images.forEach(image => {
 		console.log('mouseup event');
 
 		audio1.pause();
+		audio2.pause();
+
 	});
 
 	// Handle touch events
@@ -55,6 +64,10 @@ images.forEach(image => {
 			console.log('Image 1 selected');
 			audio1.play();
 		} 
+		else if (imageId === 'image2') {
+			console.log('Image 2 selected');
+			audio2.play();
+		} 
 	});
 
 	image.addEventListener('touchmove', (e) => {
@@ -72,12 +85,16 @@ images.forEach(image => {
 		console.log('touchend event');
 
 		audio1.pause();
+		audio2.pause();
+
 });
 
 const stopSwipe = () => {
 	console.log('stopSwipe event');
 
 	audio1.pause();
+	audio2.pause();
+
 };
 
 })
