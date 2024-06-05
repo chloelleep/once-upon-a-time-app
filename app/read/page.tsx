@@ -41,21 +41,6 @@ const ReadPage = (props: Props) => {
     }
   }, [content]);
 
-  const renderPage = () => {
-    if (!content) return "";
-
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(content, "text/html");
-    const text = doc.body.innerText;
-    const words = text.split(" ");
-    const wordsPerPage = 200; // Adjust the number of words per page
-    const start = (currentPage - 1) * wordsPerPage;
-    const end = start + wordsPerPage;
-    const pageContent = words.slice(start, end).join(" ");
-
-    return pageContent;
-  };
-
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
@@ -82,36 +67,19 @@ const ReadPage = (props: Props) => {
           </section>
         </div>
         {title && storyUrl && (
-          <main className="w-full h-screen px-48 pt-10 pb-24">
+          <main className="w-full h-[90vh] px-48 pt-4 pb-24">
             <Link href="/home">
               <Button className="bg-emerald-900 my-2">
                 <ArrowLeft />
               </Button>
             </Link>
-            <div className="w-full h-full border-2 rounded-2xl relative overflow-y-scroll p-4">
-              <div
-                className="text-xl"
-                dangerouslySetInnerHTML={{ __html: renderPage() }}
-              ></div>
-              <div className="absolute bottom-4 left-0 right-0 flex justify-between items-center px-4">
-                <button
-                  onClick={handlePreviousPage}
-                  disabled={currentPage === 1}
-                  className="bg-gray-200 p-2 rounded disabled:opacity-50"
-                >
-                  Previous
-                </button>
-                <span className="text-gray-700">
-                  Page {currentPage} of {totalPages}
-                </span>
-                <button
-                  onClick={handleNextPage}
-                  disabled={currentPage === totalPages}
-                  className="bg-gray-200 p-2 rounded disabled:opacity-50"
-                >
-                  Next
-                </button>
-              </div>
+            <div className="w-full h-full border-2 rounded-2xl relative p-4 overflow-hidden">
+              <h1 className="text-center text-2xl">{title}</h1>
+              <iframe
+                title={title}
+                className="text-xl h-full w-full"
+                src={storyUrl}
+              ></iframe>
             </div>
           </main>
         )}
