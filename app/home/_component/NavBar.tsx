@@ -7,17 +7,20 @@ type Props = {};
 
 const NavBar = (props: Props) => {
   return (
-    <div className="h-60[px] w-full flex flex-row items-center px-6 justify-between">
+    <div className="h-60[px] w-full flex flex-row items-center px-6 bg-green-200 justify-between">
       <section className="flex flex-row items-center gap-2">
         <img src="/storybook.webp" alt="storybook image" className="h-[60px]" />
-        <h1 className="text-xl text-emerald-700"> Once Upon a Time</h1>
+        <Link href="/">
+        <h1 className="text-xl text-emerald-700"> Once Upon a Time</h1></Link>
       </section>
       <section className="flex flex-row items-center gap-2">
-        <Button className="bg-emerald-700">Help Me</Button>
+      <Link href="/help"><Button className="bg-green-700">Help Me</Button> </Link>
         <Link href="/profile">
-          <Button className="bg-emerald-700 text-3xl">
-            <FaPortrait></FaPortrait>
-          </Button>
+          <Link href="/profile">
+          <Button className="bg-green-700 text-3xl">
+              <FaPortrait></FaPortrait>
+            </Button>
+        </Link>
         </Link>
       </section>
     </div>
