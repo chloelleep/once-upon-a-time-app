@@ -16,9 +16,11 @@ const NavBar = (props: Props) => {
       <section className="flex flex-row items-center gap-2">
       <Link href="/help"><Button className="bg-green-700">Help Me</Button> </Link>
         <Link href="/profile">
+          <Link href="/profile">
           <Button className="bg-green-700 text-3xl">
-            <FaPortrait></FaPortrait>
-          </Button>
+              <FaPortrait></FaPortrait>
+            </Button>
+        </Link>
         </Link>
       </section>
     </div>

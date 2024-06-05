@@ -1,51 +1,106 @@
-import React from 'react';
+"use client";
+import React from "react";
+import { Button } from "@/components/ui/button";
+import Link from "next/dist/client/link";
+import { useRouter } from "next/navigation";
 
-const LoginPage: React.FC = () => {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-green-200">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h2 className="text-4xl text-green-800 font-bold mb-6 text-center">Hello, welcome!</h2>
-        <form>
-          <div className="mb-4">
-            <label className="block text-green-700 text-2x1 font-bold mb-2" htmlFor="username">
-              Username
-            </label>
-            <input
-              className="text-sm shadow appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
-              type="text"
-              placeholder="Type your username"
-            />
-          </div>
-          <div className="mb-6">
-            <label className="block text-green-700 text-2x1 font-bold mb-2" htmlFor="password">
-              Password
-            </label>
-            <input
-              className="text-sm shadow appearance-none border rounded w-full py-2 px-3 text-gray-600 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
-              type="password"
-              placeholder="Type your password"
-            />
-          </div>
-          <div className="flex items-center justify-between">
-            <button
-              className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
-            >
-              Sign In
-            </button>
-            <a
-              className="inline-block align-baseline font-bold text-sm text-green-700 hover:text-green-800"
-              href="#"
-            >
-              Forgot Password?
-            </a>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
+type Props = {};
+
+type StoryType = {
+  name: string;
+  filesource: string;
+  storyUrl: string;
 };
 
-export default LoginPage;
+const ProfilePage = (props: Props) => {
+  const storyDataBox = Array(3).fill(0);
+  const router = useRouter();
+  const linkthing = ("/authoring");
+
+  const StoryFiles = [
+    {
+      name: "The Brave Little Rabbit",
+      filesource: "/braveRabbit.png",
+      storyUrl: "/braveRabbit.html",
+    },
+    {
+      name: "The Magic Paintbrush",
+      filesource: "/magicBrush.webp",
+      storyUrl: "/magicBrush.html",
+    },
+    {
+      name: "The Lost Star",
+      filesource: "/05365986-aaa4-46a6-9f08-7a9592e01c82.jpg",
+      storyUrl: "/lostStar.html",
+    },
+  ];
+
+  const handleOnStoryClick = (story: StoryType) => {
+    router.push(`/read/?title=${story.name}&storyUrl=${story.storyUrl}`);
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-start p-6 pt-12">    
+      <img
+        src={"pfp.jpg"}
+        alt={"My Profile"}
+        className="object-cover h-[250px] w-[250px] rounded-full mx-auto mb-4 shadow-lg"
+      />
+      <div className="text-center mb-10">
+        <h1 className="text-2x1 font-bold text-gray-800">Bluey's Profile</h1>
+      </div>
+      <div className="flex flex-wrap gap-10 mt-8 justify-center">
+          {StoryFiles.map((story) => {
+            return (
+              <div className="flex flex-col items-center pt-5 h-[235px] w-[200px] bg-green-700 rounded-lg shirnk-0">
+                <div className="bg-white h-[150px] w-[150px] rounded-lg">
+                  <button onClick={() => handleOnStoryClick(story)}>
+                    <img
+                      src={story.filesource}
+                      alt={story.name}
+                      className="object-cover h-[150px] w-[150px] rounded-lg"
+                    />
+                    <span
+                      style={{
+                        color: "white",
+                        marginTop: "10px",
+                        textAlign: "center",
+                        display: "block",
+                        width: "100%",
+                      }}
+                    >
+                      {story.name}
+                    </span>
+                  </button>
+                </div>
+              </div>
+            );
+            })}
+            <div className="flex flex-col items-center pt-5 h-[235px] w-[200px] bg-green-700 rounded-lg shirnk-0">
+                <div className="bg-white h-[150px] w-[150px] rounded-lg">
+                  <button onClick={() => router.push('/authoring') }>
+                    <img
+                      src={"plus icon.png"}
+                      alt={"plus icon"}
+                      className="object-cover h-[150px] w-[150px] rounded-lg"
+                      
+                    />
+                    <span
+                      style={{
+                        color: "white",
+                        marginTop: "10px",
+                        textAlign: "center",
+                        display: "block",
+                        width: "100%",
+                      }}
+                    >
+                      {"Add a new story..."}
+                    </span>
+                  </button>
+                </div>
+              </div>
+        </div>     
+    </div>
+    );
+};
+export default ProfilePage;
