@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="w-full h-screen text-center">
+    <main className="w-full text-center bg-green-200">
       <div className="h-60[px] w-full flex flex-row items-center px-6">
         <section className="flex flex-row items-center gap-2">
           <img
@@ -12,11 +12,11 @@ export default function Home() {
             alt="storybook image"
             className="h-[60px]"
           />
-          <h1 className="text-xl text-emerald-600"> Once Upon a Time</h1>
+          <h1 className="text-xl text-green-900"> Once Upon a Time</h1>
         </section>
         <section className="ml-auto">
           <Link href="/home">
-            <Button variant="once">
+            <Button className="bg-green-700">
               {"Get Started"} <ArrowRight />
             </Button>
           </Link>
@@ -31,12 +31,12 @@ export default function Home() {
         <img src="/storybook.webp" alt="storybook image" className="w-[25vw]" />
         <div className="flex flex-row gap-4">
           <Link href="/authoring">
-            <Button className="mb-10 bg-emerald-600">
+            <Button className="mb-10 bg-green-700">
               {"Get Started, Write Now"} <ArrowRight />
             </Button>
           </Link>
           <Link href="/main">
-            <Button className="mb-10 bg-emerald-600">{"About us"}</Button>
+            <Button className="mb-10 bg-green-700">{"About us"}</Button>
           </Link>
         </div>
       </div>
