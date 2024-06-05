@@ -56,7 +56,7 @@ const ReadPage = (props: Props) => {
   return (
     <Suspense>
       <>
-        <div className="h-60[px] w-full flex flex-row items-center px-6">
+        <div className="h-60[px] w-full flex flex-row items-center px-6 bg-green-200">
           <section className="flex flex-row items-center gap-2">
             <img
               src="/storybook.webp"
@@ -67,13 +67,13 @@ const ReadPage = (props: Props) => {
           </section>
         </div>
         {title && storyUrl && (
-          <main className="w-full h-[90vh] px-48 pt-4 pb-24">
+          <main className="w-full h-[90vh] px-48 pt-4 pb-24 bg-green-200">
             <Link href="/home">
               <Button className="bg-emerald-900 my-2">
                 <ArrowLeft />
               </Button>
             </Link>
-            <div className="w-full h-full border-2 rounded-2xl relative p-4 overflow-hidden">
+            <div className="w-full h-full border-2 rounded-2xl relative p-4 overflow-hidden bg-white">
               <h1 className="text-center text-2xl">{title}</h1>
               <iframe
                 title={title}
