@@ -35,7 +35,7 @@ export default function Home() {
               {"Get Started, Write Now"} <ArrowRight />
             </Button>
           </Link>
-          <Link href="/main">
+          <Link href="/aboutus">
             <Button className="mb-10 bg-green-700">{"About us"}</Button>
           </Link>
         </div>
