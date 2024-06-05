@@ -40,7 +40,7 @@ const ProfilePage = (props: Props) => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start p-6 pt-12">    
+    <div className="min-h-screen flex flex-col items-center justify-start p-6 pt-12 bg-green-200">    
       <img
         src={"pfp.jpg"}
         alt={"My Profile"}
