@@ -13,6 +13,7 @@ import {
   FaPencilAlt,
   FaPortrait,
   FaTools,
+  FaImage
 } from "react-icons/fa";
 import Chat from "../ai-api/page";
 import ImageToolboxDialog from "./_components/Toolbox";
@@ -166,7 +167,7 @@ const AuthoringPage = (props: Props) => {
             </Button>
           </Link>
           <Button className="bg-green-700" onClick={handleOpenToolbox}>
-            <FaTools />
+            <FaPencilAlt />
           </Button>
           <Button
             className="bg-green-700"
@@ -190,9 +191,9 @@ const AuthoringPage = (props: Props) => {
               <FaPortrait />
             </Button>
           </Link>
-          <Link href="/ai-api">
+          <Link href="/ai-image">
             <Button className="bg-green-700">
-              <FaPencilAlt />
+              <FaImage/>
             </Button>
           </Link>
         </div>
