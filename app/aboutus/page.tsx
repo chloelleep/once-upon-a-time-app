@@ -41,11 +41,11 @@ const AboutUsPage = (props: Props) => {
           <h2 className="text-3xl mb-4 text-center text-green-900">Our Team</h2>
           <ul className="text-xl text-center text-green-900">
             <li>Hannah Carino - Group Manager</li>
-            <li>Shahd - Front end Developer of the Authoring Environment</li>
-            <li>Chloe - Front end Developer of the Authoring Environment</li>
+            <li>Shahd - Front end Developer of the Authoring Environment and User Interface Design</li>
+            <li>Chloe - Front end Developer of the Authoring Environment and User Interface Design</li>
             <li>Josephine - Back end AI Programmer Developer</li>
             <li>Shriha - Back end AI Program Developer</li>
-            <li>Mahi - Multimedia Developer and Front end User Interface and Design</li>
+            <li>Mahi - Multimedia Developer and Front end User Interface and Design Figma</li>
           </ul>
         </div>
       </div>
