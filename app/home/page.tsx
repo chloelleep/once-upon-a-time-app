@@ -80,14 +80,14 @@ const DemoPage = (props: Props) => {
       <div className="w-full h-screen p-24">
         <Link href="/authoring">
           <Button
-            className="mb-10 bg-emerald-700"
+            className="mb-7 bg-green-800"
             style={{ fontSize: "24px", padding: "25px 24px" }}
           >
             {"New Story"}
           </Button>
         </Link>
         <h2
-          className="mb-4 text-lg text-emerald-800"
+          className="mb-4 text-lg text-green-800"
           style={{ fontSize: "24px" }}
         >
           You might want to try...
@@ -95,7 +95,7 @@ const DemoPage = (props: Props) => {
         <div className="flex flex-row gap-10 flex-wrap">
           {StoryFiles.map((story) => {
             return (
-              <div className="flex flex-col items-center pt-5 h-[235px] w-[200px] bg-emerald-700 rounded-lg shirnk-0">
+              <div className="flex flex-col items-center pt-5 h-[235px] w-[200px] bg-green-800 rounded-lg shirnk-0">
                 <div className="bg-white h-[150px] w-[150px] rounded-lg shirnk-0">
                   <button onClick={() => handleOnStoryClick(story)}>
                     <img
