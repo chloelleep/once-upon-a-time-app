@@ -148,34 +148,34 @@ const AuthoringPage = (props: Props) => {
 
   return (
     <>
-      <div className="h-60[px] w-full flex flex-row items-center px-6">
-        <section className="flex flex-row items-center gap-2">
-          <img
+      <div className="h-60[px] w-full flex flex-row items-center px-6 bg-green-200">
+        <Link href="/"><section className="flex flex-row items-center gap-2 ">
+         <img
             src="/storybook.webp"
             alt="storybook image"
             className="h-[60px]"
           />
-          <h1 className="text-xl text-emerald-600"> Once Upon a Time</h1>
-        </section>
+          <h1 className="text-xl text-green-800"> Once Upon a Time</h1>
+        </section></Link>
       </div>
-      <div className="flex flex-col w-full h-screen items-center p-10">
+      <div className="flex flex-col w-full h-screen items-center p-10 bg-green-200">
         <div className="flex flex-row gap-4">
-          <Link href="/">
-            <Button className="bg-emerald-900">
+          <Link href="/home">
+            <Button className="bg-green-700">
               <FaArrowLeft />
             </Button>
           </Link>
-          <Button className="bg-emerald-900" onClick={handleOpenToolbox}>
+          <Button className="bg-green-700" onClick={handleOpenToolbox}>
             <FaTools />
           </Button>
           <Button
-            className="bg-emerald-900"
+            className="bg-green-700"
             type="button"
             onClick={handleClick}
           >
             <FaDownload />
           </Button>
-          <Button className="bg-emerald-900" onClick={handleFolderOpenClick}>
+          <Button className="bg-green-700" onClick={handleFolderOpenClick}>
             <FaFolderOpen />
             <input
               type="file"
@@ -186,12 +186,12 @@ const AuthoringPage = (props: Props) => {
             />
           </Button>
           <Link href="/home">
-            <Button className="bg-emerald-900">
+            <Button className="bg-green-700">
               <FaPortrait />
             </Button>
           </Link>
           <Link href="/ai-api">
-            <Button className="bg-emerald-900">
+            <Button className="bg-green-700">
               <FaPencilAlt />
             </Button>
           </Link>
@@ -203,7 +203,7 @@ const AuthoringPage = (props: Props) => {
           onClose={handleCloseToolbox}
           onSelectImage={handleSelectImage}
         />
-        <div className="w-[90vw] h-full border-2 rounded-lg m-5 overflow-x-scroll">
+        <div className="w-[90vw] h-full border-2 rounded-lg m-5 overflow-x-scroll bg-white">
           <BlockNoteView
             theme={lightDefaultTheme}
             className="w-full py-6"
@@ -219,18 +219,18 @@ const AuthoringPage = (props: Props) => {
           />
         </div>
         <Button
-          className="z-[999] float-right mb-6 bg-emerald-600"
+          className="z-[999] float-right mb-6 bg-green-700"
           onClick={() => onChatButtonClick()}
         >
           AI Chat
         </Button>
         {showChatDialog && (
-          <div className="w-full h-screen flex flex-col items-center justify-center z-[99999] fixed">
+          <div className="w-full h-screen flex flex-col items-center justify-center z-[99999] fixed ">
             <div className="w-[400px] h-[500px] relative rounded-xl border-2 overflow-x-scroll bg-white">
               <Chat />
             </div>
             <Button
-              className="relative bottom-20"
+              className="relative bottom-20 bg-green-700"
               onClick={() => setShowChatDialog(false)}
             >
               Close
