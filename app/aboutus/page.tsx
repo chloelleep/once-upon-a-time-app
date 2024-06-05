@@ -9,9 +9,9 @@ type Props = {};
 const AboutUsPage = (props: Props) => {
   return (
     <main className='bg-green-200'>
-      <div className="flex justify-center">
+      <section className="fixed top-4 left-4 flex flex-row items-center gap-2 ">
       <Link href="/">
-      <Button className=" bg-green-800"><FaArrowLeft></FaArrowLeft></Button></Link>
+      <Button className=" bg-green-800"><FaArrowLeft></FaArrowLeft></Button></Link></section>
       <div className="w-full font-serif bg-green-200 flex justify-center items-center p-24">
       <div className="bg-green-100 p-8 rounded-lg">
         <h1 className="text-8xl text-green-900 mb-10 text-center">About Us</h1>
@@ -49,7 +49,7 @@ const AboutUsPage = (props: Props) => {
           </ul>
         </div>
       </div>
-      </div></div>
+      </div>
     </main>
   );
 };
