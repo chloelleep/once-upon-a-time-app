@@ -3,6 +3,11 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/dist/client/link";
 import { useRouter } from "next/navigation";
+import {
+  FaArrowLeft,
+} from "react-icons/fa";
+
+
 
 type Props = {};
 
@@ -40,7 +45,18 @@ const ProfilePage = (props: Props) => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start p-6 pt-12 bg-green-200">    
+    <div className="min-h-screen flex flex-col items-center justify-start p-6 pt-12 bg-green-200">  
+    <section className="fixed top-4 left-4 flex flex-row items-center gap-2 ">
+        <Link href="/home">
+            <Button className="bg-green-700">
+              <FaArrowLeft />
+            </Button>
+          </Link><img src="/storybook.webp" alt="storybook image" className="h-[60px]" />
+        <Link href="/">
+          <h1 className="text-xl text-emerald-700">Once Upon a Time</h1>
+        </Link>
+        
+      </section>  
       <img
         src={"pfp.jpg"}
         alt={"My Profile"}

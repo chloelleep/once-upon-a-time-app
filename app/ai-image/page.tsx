@@ -26,18 +26,18 @@ function Image() {
     setIsLoading(false);
   };
   return (
-    <>
-      <div className="h-60[px] w-full flex flex-row items-center px-6">
+    <div className="w-full h-[100vh] bg-green-200">
+      <div className="h-60[px] w-full flex flex-row items-center px-6 bg-green-200">
         <section className="flex flex-row items-center gap-2">
           <img
             src="/storybook.webp"
             alt="storybook image"
             className="h-[60px]"
           />
-          <h1 className="text-xl text-emerald-600"> Once Upon a Time</h1>
+          <h1 className="text-xl text-green-700"> Once Upon a Time</h1>
         </section>
       </div>
-      <div className="app-main">
+      <div className=" app-main   bg-green-200">
         <h2>Generate an Image For Your Story</h2>
         <input
           className="app-input"
@@ -92,6 +92,7 @@ function Image() {
               justifyContent: "flex-start",
               alignItems: "center",
               padding: "10px",
+              backgroundColor:"green-200",
             }}
           >
             <button
@@ -110,7 +111,7 @@ function Image() {
           </div>
         </Link>
       </div>
-    </>
+    </div>
   );
 }
 
