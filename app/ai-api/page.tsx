@@ -172,66 +172,6 @@ export default function Chat() {
             <p className="text-center text-gray-400">I am at your service</p>
           )}
         </div>
-
-        <Link href="/authoring">
-          <div
-            style={{
-              position: "fixed",
-              left: 0,
-              bottom: 0,
-              width: "20%",
-              display: "flex",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              padding: "10px",
-              backgroundColor: "white",
-            }}
-          >
-            <button
-              style={{
-                padding: "6px 12px",
-                fontSize: "14px",
-                backgroundColor: "transparent",
-                color: "black",
-                fontWeight: "bold",
-                borderRadius: "14px",
-                border: "1px solid black",
-              }}
-            >
-              Back to Authoring
-            </button>
-          </div>
-        </Link>
-
-        <Link href="/ai-image">
-          <div
-            style={{
-              position: "fixed",
-              right: 0,
-              bottom: 0,
-              width: "20%",
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-              padding: "10px",
-              backgroundColor: "white",
-            }}
-          >
-            <button
-              style={{
-                padding: "6px 12px",
-                fontSize: "14px",
-                backgroundColor: "transparent",
-                color: "black",
-                fontWeight: "bold",
-                borderRadius: "14px",
-                border: "1px solid black",
-              }}
-            >
-              Generate Images Option
-            </button>
-          </div>
-        </Link>
       </main>
     </>
   );
