@@ -44,6 +44,16 @@ const LoginPage: React.FC = () => {
             >
               Forgot Password?
             </a>
+            
+          </div>
+          <div className="flex items-center justify-between mt-4">
+            <a
+              className="inline-block align-baseline font-bold text-sm text-green-700 hover:text-green-800"
+            >
+              <Link href="/signup">
+                Make a new account?
+              </Link>
+            </a>
           </div>
         </form>
       </div>
